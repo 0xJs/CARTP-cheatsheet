@@ -252,6 +252,12 @@ Get-AzureADDirectoryRole
 Get-AzureADDirectoryRole -Filter "DisplayName eq 'Global Administrator'" | Get-AzureADDirectoryRoleMember
 ```
 
+### List custom roles
+```
+Import module AzureADPreview.psd1
+Get-AzureADMSRoleDefinition | ?{$_.IsBuiltin -eq $False} | select DisplayName
+```
+
 ### Devices enumeration
 #### Get all Azure joined and registered devices
 ```
