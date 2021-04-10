@@ -37,6 +37,7 @@ the core domain. it is possible to define custom domain names too.
 -Azure Resource manager
   - It is the client neutral deployment and management service for Azure that is used for lifecycle management (creating, updating and deleting) and access control of of resources.
   - ARM templates can be used for consistent and dependency-defined redeployment of resources.
+- Note: A global administration can always elevate their privileges to the Root management group
 
 # Enumeration
 ### Manually
