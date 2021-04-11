@@ -202,6 +202,16 @@ cd C:\xampp\htdocs\365-Stealer\
 - In case of OS command injection, it is possible to run arbitrary operating  system commands on the server where requests are processed. 
 - This is usually due to insecure parsing of user input such as parameters, uploaded files and HTTP requests. 
 
+## Storage account
+#### Enumerate Azureblobs
+- add permutations to permutations.txt like common, backup, code in the misc directory.
+```
+Import-Module ./Microburst.psm1
+Invoke-EnumerateAzureBlobs -Base defcorp
+```
+- Access the URL's and see if any files are listed (Example https://defcorpcommon.blob.core.windows.net/backup?restype=container&comp=list)
+- Access the files by adding it to the url (Example https://defcorpcommon.blob.core.windows.net/backup/blob_client.py)
+- Check for a SAS URL, if found then open the "Connect to Azure Storage", select 'Shared Access Signatur (SAS)' and paste the URL, displayname will fill automatically.
 
 # Authenticated enumeration
 ## Enumeration through Azure portal
