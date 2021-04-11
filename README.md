@@ -198,6 +198,11 @@ cd C:\xampp\htdocs\365-Stealer\
 - Use ```{{config.items()}}``` and see if it works.
 - Check if a managed identity is assigned (Check for the env variables IDENTITY_HEADER and IDENTITY_ENDPOINT)
 
+## OS Command injection
+- In case of OS command injection, it is possible to run arbitrary operating  system commands on the server where requests are processed. 
+- This is usually due to insecure parsing of user input such as parameters, uploaded files and HTTP requests. 
+
+
 # Authenticated enumeration
 ## Enumeration through Azure portal
 #### Login azure portal
@@ -506,6 +511,7 @@ Get-AzSubscription
 ```
 
 #### Enumerate all resources visible to the current user
+- Error 'this.Client.SubscriptionId' cannot be null' means the managed identity has no rights on any of the Azure resources.
 ```
 Get-AzResource
 ```
@@ -1033,6 +1039,26 @@ Headers = @{
 }
 
 (Invoke-RestMethod @RequestParams).value
+```
+
+#### List all enterprise applications
+```
+$Token = 'ey..'
+$URI = 'https://graph.microsoft.com/v1.0/applications'
+$RequestParams = @{
+  Method = 'GET'
+  Uri = $URI
+  Headers = @{
+    'Authorization' = "Bearer $Token"
+  }
+}
+(Invoke-RestMethod @RequestParams).value
+```
+
+#### Check if secrets (application passwords) can be added to all enterprise applications
+```
+. .\Add-AzADAppSecret.ps1
+Add-AzADAppSecret -GraphToken $graphtoken -Verbose
 ```
 
 ### Enumerating Azure AD environments!
