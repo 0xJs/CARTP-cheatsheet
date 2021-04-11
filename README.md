@@ -193,6 +193,10 @@ cd C:\xampp\htdocs\365-Stealer\
 ## Server Side Template Injection
 - SSTI allows an attacker to abuse template syntax to inject payloads in a template that is executed on the server side. 
 - That is, we can get command execution on a server by abusing this.
+- Find we webapp which is vulnerable, test with injectin a expression ```{{7*7}}``` and see if it gets evaluated.
+- The way expression is evaluated means that, most probably, either PHP or Python is used for the web app. We may need to run some trial and error methods to find out the exact language and template framework. 
+- Use ```{{config.items()}}``` and see if it works.
+- Check if a managed identity is assigned (Check for the env variables IDENTITY_HEADER and IDENTITY_ENDPOINT)
 
 # Authenticated enumeration
 ## Enumeration through Azure portal
@@ -611,6 +615,22 @@ Get-AzStorageAccount | fl
 Get-AzKeyVault
 ```
 
+
+#### Get info about a specific keyvault
+```
+Get-AzKeyVault -VaultName ResearchKeyVault
+```
+
+#### List the saved creds from keyvault
+```
+Get-AzKeyVaultSecret -VaultName ResearchKeyVault -AsPlainText
+```
+
+#### Read creds from a keyvault
+```
+Get-AzKeyVaultSecret -VaultName ResearchKeyVault -Name Reader -AsPlainText
+```
+
 ## Enumeration using Azure CLI
 - Install https://docs.microsoft.com/en-us/cli/azure/install-azure-cli
 - Accessible in the cloud shell to
@@ -884,9 +904,11 @@ Connect-AzAccount -AccountId test@defcorphq@onmicrosoft.com -AccessToken eyJ0eXA
 ```
 
 #### Use other access token
-In the below command, use the one for AAD Graph (access token is still required) for accessing Azure AD
+- In the below command, use the one for AAD Graph (access token is still required) for accessing Azure AD
+- To access something like keyvault you need to get the access token for it before you can access it.
 ```
 Connect-AzAccount -AccountId test@defcorphq@onmicrosoft.com -AccessToken eyJ0eXA... -GraphAccessToken eyJ0eXA...
+Connect-AzAccount -AccountId test@defcorphq@onmicrosoft.com -AccessToken eyJ0eXA... 
 ```
 
 ### Using tokes with CLI Tools - az cli
