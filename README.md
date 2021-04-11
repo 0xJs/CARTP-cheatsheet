@@ -892,19 +892,73 @@ roadrecon gather
 roadrecon gui
 ```
 
-####
+### Stormspotter
+https://github.com/Azure/Stormspotter
+
+#### Start the backend service
+```
+cd C:\AzAD\Tools\stormspotter\backend\
+pipenv shell
+python ssbackend.pyz
 ```
 
+#### Start the frontend server
+```
+cd C:\AzAD\Tools\stormspotter\frontend\dist\spa\
+quasar.cmd serve -p 9091 --history
 ```
 
-####
+#### Collect data
+```
+cd C:\AzAD\Tools\stormspotter\stormcollector\
+pipenv shell
+az login -u test@defcorphq.onmicrosoft.com -p SuperVeryEasytoGuessPassword@1234
+python C:\AzAD\Tools\stormspotter\stormcollector\sscollector.pyz cli 
 ```
 
+#### Check data
+- Log-on to the webserver at http://localhost:9091. creds = neo4j:BloodHound
+- After login, upload the ZIP archive created by the collector.
+- Use the built-in queries to visualize the data.
+
+### Bloodhound / Azurehound
+https://github.com/BloodHoundAD/AzureHound
+
+#### Run the collector to collect data
+```
+$passwd = ConvertTo-SecureString "SuperVeryEasytoGuessPassword@1234" -AsPlainText -Force
+$creds = New-Object System.Management.Automation.PSCredential ("test@defcorphq.onmicrosoft.com", $passwd) 
+
+Connect-AzAccount -Credential $creds
+Connect-AzureAD -Credential $creds
+
+. C:\AzAD\Tools\AzureHound\AzureHound.ps1
+Invoke-AzureHound -Verbose
 ```
 
-####
+#### Find all users who have the Global Administrator role
+```
+MATCH p =(n)-[r:AZGlobalAdmin*1..]->(m) RETURN p
 ```
 
+#### Find all paths to an Azure VM
+```
+MATCH p = (n)-[r]->(g: AZVM) RETURN p
+```
+
+#### Find all paths to an Azure KeyVault
+```
+MATCH p = (n)-[r]->(g:AZKeyVault) RETURN p
+```
+
+#### Find all paths to an Azure Resource Group
+```
+MATCH p = (n)-[r]->(g:AZResourceGroup) RETURN p
+```
+
+#### Find Owners of Azure Groups
+```
+MATCH p = (n)-[r:AZOwns]->(g:AZGroup) RETURN p
 ```
 
 # Privilege escalation
