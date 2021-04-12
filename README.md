@@ -39,6 +39,12 @@ the core domain. it is possible to define custom domain names too.
   - ARM templates can be used for consistent and dependency-defined redeployment of resources.
 - Note: A global administration can always elevate their privileges to the Root management group
 
+# General
+#### List all commands from a specific module
+```
+Get-Command -Module <MODULE NAME>
+```
+
 # Enumeration
 ### Manually
 #### Get tenant name and fedaration (If azure tenant is in use)
