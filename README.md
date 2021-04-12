@@ -561,6 +561,7 @@ Get-AzSubscription
 - Error 'this.Client.SubscriptionId' cannot be null' means the managed identity has no rights on any of the Azure resources.
 ```
 Get-AzResource
+Get-AzResource | select-object Name, Resourcetype
 ```
 
 #### Enumerate all Azure RBAC role assignments
@@ -645,21 +646,24 @@ Get-AzADServicePrincipal | ?{$_.DisplayName -match "app"}
 
 #### List all VM's the user has access to
 ```
+Get-AzVM 
 Get-AzVM | fl
 ```
 
 #### Get all function apps
 ```
-Get-AzFunctionAp
+Get-AzFunctionApp
 ```
 
 #### Get all webapps
 ```
 Get-AzWebApp
+Get-AzWebApp | select-object Name, Type, Hostnames
 ```
 
 #### List all storage accounts
 ```
+Get-AzStorageAccount
 Get-AzStorageAccount | fl
 ```
 
@@ -667,7 +671,6 @@ Get-AzStorageAccount | fl
 ```
 Get-AzKeyVault
 ```
-
 
 #### Get info about a specific keyvault
 ```
