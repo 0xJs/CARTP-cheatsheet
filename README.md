@@ -39,17 +39,11 @@ the core domain. it is possible to define custom domain names too.
   - ARM templates can be used for consistent and dependency-defined redeployment of resources.
 - Note: A global administration can always elevate their privileges to the Root management group
 
-# General
-#### List all commands from a specific module
-```
-Get-Command -Module <MODULE NAME>
-```
-
 # Enumeration
 ### Manually
 #### Get tenant name and fedaration (If azure tenant is in use)
 ```
-https://login.microsoftonline.com/getuserrealm.srf?login=<USER@DOMAIN>.com&xml=1
+https://login.microsoftonline.com/getuserrealm.srf?login=<USER>@<DOMAIN>&xml=1
 https://login.microsoftonline.com/getuserrealm.srf?login=root@defcorphq.onmicrosoft.com&xml=1
 ```
 
@@ -59,6 +53,8 @@ https://login.microsoftonline.com/<DOMAIN>/.well-known/openid-configuration
 https://login.microsoftonline.com/defcorphq.onmicrosoft.com/.well-known/openid-configuration
 ```
 ### AADinternals
+https://github.com/Gerenios/AADInternals
+https://o365blog.com/aadinternals/
 #### Import the AADinternals module
 ```
 import-module .\AADInternals.psd1
