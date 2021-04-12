@@ -55,7 +55,7 @@ ls \\<COMPUTERNAME>\c$
 $host.ui.RawUI.WindowTitle = "<NAME>"
 ```
 
-# Enumeration
+# Recon
 ### Manually
 #### Get tenant name and fedaration (If azure tenant is in use)
 ```
