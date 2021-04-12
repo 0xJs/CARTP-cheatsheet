@@ -520,12 +520,12 @@ Get-AzureADServicePrincipal | Get-AzureADServicePrincipalMembership
 Install-Module Az
 ```
 
-#### List cmdlets for Az AD powershell (*Azad format*)
+#### List cmdlets for Az AD powershell (\*Azad format\*)
 ```
 get-command *azad*
 ```
 
-#### List all cmdlets for Azure resources (*Az format*)
+#### List all cmdlets for Azure resources (\*Az format\*)
 ```
 Get-Command *aZ*
 ```
