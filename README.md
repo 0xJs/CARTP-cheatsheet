@@ -101,6 +101,13 @@ Import-Module MicroBurst.psm1 -Verbose
 Invoke-EnumerateAzureSubDomains -Base defcorphq -Verbose
 ```
 
+#### Enumerate Azureblobs
+- add permutations to permutations.txt like common, backup, code in the misc directory.
+```
+Import-Module ./Microburst.psm1
+Invoke-EnumerateAzureBlobs -Base defcorp
+```
+
 # Initial access attacks
 ## Password spray
 - https://github.com/dafthack/MSOLSpray
