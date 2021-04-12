@@ -245,6 +245,7 @@ Login to the azure portal with successfull attacks https://portal.azure.com/
 
 #### Enumerate users, groups, devices, directory roles, enterprise applications
 - Open the left menu --> Azure Active directory and click check the users, groups, Roles and administrators, Enterprise Application and devices tab.
+- Also worth checking the "App services" and "Virtual machines" 
 
 ## Enumeration using AzureAD Module
 - https://www.powershellgallery.com/packages/AzureAD
@@ -279,6 +280,7 @@ Get-AzureADTenantDetail
 #### Enumerate all users
 ```
 Get-AzureADUser -All $true
+Get-AzureADUser -all $true | Select-Object UserPrincipalName, Usertype
 ```
 
 #### Enumerate a specific user
@@ -303,13 +305,9 @@ Get-AzureADUser -ObjectId test@defcorphq.onmicrosoft.com | fl *
 Get-AzureADUser -ObjectId test@defcorphq.onmicrosoft.com | %{$_.PSObject.Properties.Name} 
 ```
 
-#### Search attributes for all uers that contain the string "password" 
+#### Search attributes for all users that contain the string "password" 
 ```
-Get-AzureADUser |%{$Properties =
-$_;$Properties.PSObject.Properties.Name | % {if
-($Properties.$_ -match 'password') 
-{"$($Properties.UserPrincipalName) - $_ -
-$($Properties.$_)"}}}
+Get-AzureADUser |%{$Properties =$_;$Properties.PSObject.Properties.Name | % {if($Properties.$_ -match 'password'){"$($Properties.UserPrincipalName) - $_ -$($Properties.$_)"}}}
 ```
 
 #### All users who are synced from on-prem
@@ -397,7 +395,10 @@ Get-AzureADDirectoryRole -Filter "DisplayName eq 'Global Administrator'" | Get-A
 
 ### List custom roles
 ```
-Import module AzureADPreview.psd1
+Import-Module .\AzureADPreview.psd1
+$creds = Get-Credential
+Connect-AzureAD -Credential $creds
+
 Get-AzureADMSRoleDefinition | ?{$_.IsBuiltin -eq $False} | select DisplayName
 ```
 
