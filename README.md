@@ -39,6 +39,22 @@ the core domain. it is possible to define custom domain names too.
   - ARM templates can be used for consistent and dependency-defined redeployment of resources.
 - Note: A global administration can always elevate their privileges to the Root management group
 
+# General
+#### Access C disk of a computer (check local admin)
+```
+ls \\<COMPUTERNAME>\c$
+```
+
+#### Use this parameter to not print errors powershell
+```
+-ErrorAction SilentlyContinue
+```
+
+#### Rename powershell windows
+```
+$host.ui.RawUI.WindowTitle = "<NAME>"
+```
+
 # Enumeration
 ### Manually
 #### Get tenant name and fedaration (If azure tenant is in use)
@@ -109,7 +125,7 @@ Invoke-EnumerateAzureBlobs -Base defcorp -OutputFile azureblobs.txt
 - https://github.com/dafthack/MSOLSpray
 - https://github.com/ustayready/fireprox
 ```
-Invoke-MSOLSpray -UserList C:\AzAD\Tools\validemails.txt -Password SuperVeryEasytoGuessPassword@1234 -Verbose
+Import-Module .\MSOLSpray.ps1
 ```
 
 ## Illicit Consent Grant
@@ -240,6 +256,12 @@ Import-Module AzureAD.psd1
 #### Connect to Azure AD
 ```
 $creds = Get-Credential
+Connect-AzureAD -Credential $creds
+```
+
+```
+$passwd = ConvertTo-SecureString "SuperVeryEasytoGuessPassword@1234" -AsPlainText -Force
+$creds = New-Object System.Management.Automation.PSCredential ("test@defcorphq.onmicrosoft.com", $passwd)
 Connect-AzureAD -Credential $creds
 ```
 
