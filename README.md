@@ -307,7 +307,7 @@ Get-AzureADUser -ObjectId test@defcorphq.onmicrosoft.com | %{$_.PSObject.Propert
 
 #### Search attributes for all users that contain the string "password" 
 ```
-Get-AzureADUser |%{$Properties =$_;$Properties.PSObject.Properties.Name | % {if($Properties.$_ -match 'password'){"$($Properties.UserPrincipalName) - $_ -$($Properties.$_)"}}}
+Get-AzureADUser -All $true |%{$Properties = $_;$Properties.PSObject.Properties.Name | % {if ($Properties.$_ -match 'password') {"$($Properties.UserPrincipalName) - $_ - $($Properties.$_)"}}}
 ```
 
 #### All users who are synced from on-prem
