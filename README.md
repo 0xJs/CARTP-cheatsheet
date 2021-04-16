@@ -1057,8 +1057,7 @@ $RequestParams = @{
 
 #### List all the resources available by the managed identity to the app service
 ```
-$URI = 'https://management.azure.com/subscriptions/b413826f-108d-4049-8c11-
-d52d5d388768/resources?api-version=2020-10-01'
+$URI = 'https://management.azure.com/subscriptions/b413826f-108d-4049-8c11-d52d5d388768/resources?api-version=2020-10-01'
 $RequestParams = @{
  Method = 'GET'
  Uri = $URI
