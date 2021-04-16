@@ -997,6 +997,7 @@ AzureAD module cannot request a token but can use one for AADGraph or Microsoft 
 ####
 ```
 Connect-AzureAD -AccountId test@defcorphq@onmicrosoft.com -AadAccessToken eyJ0eXA...
+Connect-AzureAD -AccountId <ID> -AadAccessToken $token -TenantId <TENANT ID>
 ```
 
 ### Using tokens with API's - management
