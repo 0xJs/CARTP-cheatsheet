@@ -1007,8 +1007,7 @@ Connect-AzureAD -AccountId test@defcorphq@onmicrosoft.com -AadAccessToken eyJ0eX
 #### Get an access token and use it with ARM API. For example, list all the subscriptions
 ```
 $Token = 'eyJ0eXAi..'
-$URI = 'https://management.azure.com/subscriptions?api-version=2020-
-01-01'
+$URI = 'https://management.azure.com/subscriptions?api-version=2020-01-01'
 $RequestParams = @{
 Method = 'GET'
 Uri = $URI
@@ -1022,8 +1021,7 @@ Headers = @{
 #### Get an access token for MS Graph. For example, list all the users
 ```
 $Token = 'eyJ0eXAi..'
-$URI = 'https://management.azure.com/subscriptions?api-version=2020-
-01-01'
+$URI = 'https://management.azure.com/subscriptions?api-version=2020-01-01'
 $RequestParams = @{
 Method = 'GET'
 Uri = $URI
