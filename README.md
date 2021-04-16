@@ -557,6 +557,11 @@ Get-AzContext -ListAvailable
 Get-AzSubscription
 ```
 
+#### List info on the current user
+```
+az ad signed-in-user show
+```
+
 #### Enumerate all resources visible to the current user
 - Error 'this.Client.SubscriptionId' cannot be null' means the managed identity has no rights on any of the Azure resources.
 ```
@@ -746,6 +751,11 @@ az account subscription list
 az ad signed-in-user show
 ```
 
+#### List all owned objects by user
+```
+az ad signed-in-user list-owned-objects
+```
+
 #### Enumerate all users
 ```
 az ad user list
@@ -929,6 +939,8 @@ az keyvault list
 az storage account list
 ```
 
+
+
 ## Using Azure tokens
 - Both Az PowerShell and AzureAD modules allow the use of Access tokens for authentication.
 - Usually, tokens contain all the claims (including that for MFA and Conditional Access etc.) so they are useful in bypassing such security controls.
@@ -972,6 +984,11 @@ az cli can request a token but cannot use it!
 az account get-access-token
 ```
 
+#### Request a token for azure graph
+```
+az account get-access-token --resource-type aad-graph
+```
+
 #### Request an access token
 Supported tokens - aad-graph, arm, batch, data-lake, media, ms-graph, oss-rdbms
 ```
@@ -993,8 +1010,10 @@ az account get-access-token --resource-type ms-graph
 - Always use Disconnect-AzAccount!!
 
 ### Using tokes with AzureAD module
-AzureAD module cannot request a token but can use one for AADGraph or Microsoft Graph!
-####
+- AzureAD module cannot request a token but can use one for AADGraph or Microsoft Graph!
+- To be able to interact with Azure AD, request a token for the aad-graph.
+
+#### Connecting with AzureAD
 ```
 Connect-AzureAD -AccountId test@defcorphq@onmicrosoft.com -AadAccessToken eyJ0eXA...
 Connect-AzureAD -AccountId <ID> -AadAccessToken $token -TenantId <TENANT ID>
@@ -1202,6 +1221,32 @@ MATCH p = (n)-[r:AZOwns]->(g:AZGroup) RETURN p
 ```
 
 # Privilege escalation
+#### List all owned objects
+```
+az ad signed-in-user list-owned-objects
+```
+
+#### Add a user to a group
+```
+Add-AzureADGroupMember -ObjectId <GROUP ID> -RefObjectId <USER ID> -Verbose
+```
+
+## Automation account
+- Automation Account comes very handy in privilege escalation:
+  – Run As account is by default contributor on the current subscription and possible to have contributor permissions on other subscriptions in the tenant. 
+  – Often, clear-text privileges can be found in Runbooks. For example, a PowerShell runbook may have admin credentials for a VM to use PSRemoting. 
+  – Access to connections, key vaults from a runbook. 
+  – Ability to run commands on on-prem VMs if hybrid workers are in use.
+  – Ability to run commands on VMs using DSC in configuration management.
+
+#### Get information on automation accounts
+```
+az extension add --upgrade -n automation
+az automation account list
+```
+
+## Automation account
+
 ####
 ```
 
