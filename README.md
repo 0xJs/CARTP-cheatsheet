@@ -1235,11 +1235,11 @@ Add-AzureADGroupMember -ObjectId <GROUP ID> -RefObjectId <USER ID> -Verbose
 
 ## Automation account
 - Automation Account comes very handy in privilege escalation:
-– Run As account is by default contributor on the current subscription and possible to have contributor permissions on other subscriptions in the tenant.   
-– Often, clear-text privileges can be found in Runbooks. For example, a PowerShell runbook may have admin credentials for a VM to use PSRemoting. 
-– Access to connections, key vaults from a runbook. 
-– Ability to run commands on on-prem VMs if hybrid workers are in use.
-– Ability to run commands on VMs using DSC in configuration management.
+  - Run As account is by default contributor on the current subscription and possible to have contributor permissions on other subscriptions in the tenant.   
+  - Often, clear-text privileges can be found in Runbooks. For example, a PowerShell runbook may have admin credentials for a VM to use PSRemoting. 
+  - Access to connections, key vaults from a runbook. 
+  - Ability to run commands on on-prem VMs if hybrid workers are in use.
+  - Ability to run commands on VMs using DSC in configuration management.
 
 #### Get information on automation accounts
 ```
