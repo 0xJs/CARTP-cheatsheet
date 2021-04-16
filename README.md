@@ -695,11 +695,7 @@ Get-AzKeyVaultSecret -VaultName ResearchKeyVault -Name Reader -AsPlainText
 ```
 az login
 
-az login -u test@defcorphq.onmicrosoft.com -p
-SuperVeryEasytoGuessPassword@1234 
-
-az login -u test@defcorphq.onmicrosoft.com -p
-SuperVeryEasytoGuessPassword@1234 
+az login -u test@defcorphq.onmicrosoft.com -p SuperVeryEasytoGuessPassword@1234 
 ```
 
 #### Configure default behavior (Output type, location, resource group etc)
