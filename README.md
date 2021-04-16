@@ -574,6 +574,11 @@ Get-AzResource | select-object Name, Resourcetype
 Get-AzRoleAssignment
 ```
 
+#### Get role assignment of a specific id
+```
+Get-AzRoleAssignment -Scope /subscriptions/b413826f-108d-4049-8c11-d52d5d388768/resourceGroups/Engineering/providers/Microsoft.Automation/automationAccounts/HybridAutomation
+```
+
 #### Enumerate all users
 ```
 Get-AzADUser
@@ -1245,7 +1250,18 @@ az extension add --upgrade -n automation
 az automation account list
 ```
 
-## Automation account
+### Get the tokens to use Az Powershell
+```
+az account get-access-token
+az account get-access-token --resource-type aad-graph
+
+$accesstoken = ''
+$aadtoken = ''
+
+Connect-AzAccount -AccessToken $accesstoken -GraphAccessToken $aadtoken -AccountId <ID>
+```
+
+####
 
 ####
 ```
