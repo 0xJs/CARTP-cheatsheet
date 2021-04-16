@@ -4,12 +4,9 @@ Azure AD cheatsheet for the CARTP course
 ## General information
 ### Terminology
 - Tenant - An instance of Azure AD and represents a single organization.
-- Azure AD Directory - Each tenant has a dedicated Directory. This is used 
-to perform identity and access management functions for resources. 
-- Subscriptions - It is used to pay for services. There can be multiple 
-subscriptions in a Directory.
-- Core Domain - The initial domain name <tenant>.onmicrosoft.com is 
-the core domain. it is possible to define custom domain names too.
+- Azure AD Directory - Each tenant has a dedicated Directory. This is used to perform identity and access management functions for resources. 
+- Subscriptions - It is used to pay for services. There can be multiple subscriptions in a Directory.
+- Core Domain - The initial domain name <tenant>.onmicrosoft.com is the core domain. it is possible to define custom domain names too.
 - Azure resourced are divided into four levels:
   - Management groups
     - Management groups are used to manage multiple subscriptions. 
@@ -1238,7 +1235,7 @@ Add-AzureADGroupMember -ObjectId <GROUP ID> -RefObjectId <USER ID> -Verbose
 
 ## Automation account
 - Automation Account comes very handy in privilege escalation:
-  – Run As account is by default contributor on the current subscription and possible to have contributor permissions on other subscriptions in the tenant. 
+  – Run As account is by default contributor on the current subscription and possible to have contributor permissions on other subscriptions in the tenant.   
   – Often, clear-text privileges can be found in Runbooks. For example, a PowerShell runbook may have admin credentials for a VM to use PSRemoting. 
   – Access to connections, key vaults from a runbook. 
   – Ability to run commands on on-prem VMs if hybrid workers are in use.
