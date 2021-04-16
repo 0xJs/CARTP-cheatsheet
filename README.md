@@ -236,7 +236,7 @@ Invoke-EnumerateAzureBlobs -Base defcorp
 ```
 - Access the URL's and see if any files are listed (Example https://defcorpcommon.blob.core.windows.net/backup?restype=container&comp=list)
 - Access the files by adding it to the url (Example https://defcorpcommon.blob.core.windows.net/backup/blob_client.py)
-- Check for a SAS URL, if found then open the "Connect to Azure Storage", select 'Shared Access Signatur (SAS)' and paste the URL, displayname will fill automatically.
+- Check for a SAS URL, if found then open the "Connect to Azure Storage", select "blobl container" and select 'Shared Access Signatur (SAS)' and paste the URL, displayname will fill automatically.
 
 # Authenticated enumeration
 ## Enumeration through Azure portal
