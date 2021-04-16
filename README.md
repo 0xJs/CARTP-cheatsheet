@@ -982,7 +982,7 @@ az account get-access-token --resource-type ms-graph
 ```
 
 ### Stealing tokens from az cli
-- az cli stores access tokens in clear text in accessTokens.json in the directory C:\Users\<username>\.Azure
+- az cli stores access tokens in clear text in accessTokens.json in the directory C:\Users\\<username>\\.Azure
 - We can read tokens from the file, use them and request new ones too!
 - azureProfile.json in the same directory contains information about subscriptions. 
 - You can modify accessTokens.json to use access tokens with az cli but better to use with Az PowerShell or the Azure AD module.
