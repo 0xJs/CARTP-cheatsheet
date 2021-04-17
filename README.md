@@ -575,11 +575,6 @@ Get-AzContext -ListAvailable
 Get-AzSubscription
 ```
 
-#### List info on the current user
-```
-az ad signed-in-user show
-```
-
 #### Enumerate all resources visible to the current user
 - Error 'this.Client.SubscriptionId' cannot be null' means the managed identity has no rights on any of the Azure resources.
 ```
@@ -724,6 +719,11 @@ Get-AzKeyVaultSecret -VaultName ResearchKeyVault -Name Reader -AsPlainText
 az login
 
 az login -u test@defcorphq.onmicrosoft.com -p SuperVeryEasytoGuessPassword@1234 
+```
+
+#### List info on the current user
+```
+az ad signed-in-user show
 ```
 
 #### Configure default behavior (Output type, location, resource group etc)
