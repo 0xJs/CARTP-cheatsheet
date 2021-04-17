@@ -1168,6 +1168,21 @@ $RequestParams = @{
 (Invoke-RestMethod @RequestParams).value
 ```
 
+#### List all the groups, administrative units of a user
+```
+$Token = 'eyJ0..' 
+$URI =
+'https://graph.microsoft.com/v1.0/users/VMContributorX@defcorphq.onmicrosoft.com/memberOf'
+$RequestParams = @{
+ Method = 'GET'
+ Uri = $URI
+ Headers = @{
+ 'Authorization' = "Bearer $Token"
+ }
+}
+(Invoke-RestMethod @RequestParams).value
+```
+
 #### Check if secrets (application passwords) can be added to all enterprise applications
 ```
 . .\Add-AzADAppSecret.ps1
