@@ -456,6 +456,22 @@ Get-AzureADUserRegisteredDevice -ObjectId michaelmbarron@defcorphq.onmicrosoft.c
 Get-AzureADDevice -All $true | ?{$_.IsCompliant -eq "True"} 
 ```
 
+### Administrative-unit Enumeration
+#### List the administrative units
+```
+Get-AzureADMSAdministrativeUnit
+```
+
+#### Get members of the administrative unit
+```
+Get-AzureADMSAdministrativeUnitMember -id <ID>
+```
+
+#### Get roles scoped in the administrative unit
+```
+Get-AzureADMSScopedRoleMembership -id <ID> | fl *
+```
+
 ### App enumeration
 #### Get all application objects registered using the current tenant.
 ```
