@@ -587,9 +587,14 @@ Get-AzResource | select-object Name, Resourcetype
 Get-AzRoleAssignment
 ```
 
-#### Get role assignment of a specific id
+#### Check role assignments on ResourceID
 ```
-Get-AzRoleAssignment -Scope /subscriptions/b413826f-108d-4049-8c11-d52d5d388768/resourceGroups/Engineering/providers/Microsoft.Automation/automationAccounts/HybridAutomation
+Get-AzRoleAssignment -Scope <RESOURCE ID>
+```
+
+#### Get the allowed actions on the role definition
+```
+Get-AzRoleDefinition -Name "<ROLE DEFINITION NAME>"
 ```
 
 #### Enumerate all users
@@ -1245,6 +1250,7 @@ MATCH p = (n)-[r:AZOwns]->(g:AZGroup) RETURN p
 
 # Privilege escalation
 - These seperate commando's aren't complete. Have to go through all authenticated enumeration commands for quick wins!
+## Privesc enumeration
 #### List all owned objects
 ```
 az ad signed-in-user list-owned-objects
@@ -1258,6 +1264,16 @@ Add-AzureADGroupMember -ObjectId <GROUP ID> -RefObjectId <USER ID> -Verbose
 #### List all accessible resources
 ```
 Get-AzResource
+```
+
+#### Check role assignments on ResourceID
+```
+Get-AzRoleAssignment -Scope <RESOURCE ID>
+```
+
+#### Get the allowed actions on the role definition
+```
+Get-AzRoleDefinition -Name "<ROLE DEFINITION NAME>"
 ```
 
 ## Automation account
