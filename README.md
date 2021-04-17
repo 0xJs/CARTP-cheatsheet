@@ -137,6 +137,8 @@ Invoke-EnumerateAzureSubDomains -Base defcorphq –Verbose
 - See the "Using Azure tokens" section
 
 #### Get admin consent
+- https://docs.microsoft.com/en-us/azure/active-directory/manage-apps/grant-admin-consent
+- Global Admin, Application Admin, or Cloud Application Administrator can all grant tenant wide application admin consent
 ```
 - In the left menu go to 'API permissions' and add the mail.read, notes.read.all, mailboxsettings.readwrite, files.readwrite.all, mail.send to Microsoft Graph.
 - Refish the user to get a token with the extra permissions
