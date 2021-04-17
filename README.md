@@ -1223,6 +1223,11 @@ Connect-AzureAD -Credential $creds
 Invoke-AzureHound -Verbose
 ```
 
+#### Change object ID's to names in Bloodhound
+```
+MATCH (n) WHERE n.azname IS NOT NULL AND n.azname <> "" AND n.name IS NULL SET n.name = n.azname
+```
+
 #### Find all users who have the Global Administrator role
 ```
 MATCH p =(n)-[r:AZGlobalAdmin*1..]->(m) RETURN p
