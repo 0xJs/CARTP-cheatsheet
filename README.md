@@ -1243,7 +1243,8 @@ python C:\AzAD\Tools\stormspotter\stormcollector\sscollector.pyz cli
 - Use the built-in queries to visualize the data.
 
 ### Bloodhound / Azurehound
-https://github.com/BloodHoundAD/AzureHound
+- https://github.com/BloodHoundAD/AzureHound
+- More queries: https://hausec.com/2020/11/23/azurehound-cypher-cheatsheet/
 
 #### Run the collector to collect data
 ```
