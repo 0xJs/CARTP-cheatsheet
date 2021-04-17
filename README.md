@@ -472,6 +472,11 @@ Get-AzureADMSAdministrativeUnitMember -id <ID>
 Get-AzureADMSScopedRoleMembership -id <ID> | fl *
 ```
 
+#### Check the role using the roleid
+```
+Get-AzureADDirectoryRole -ObjectId <ID>
+```
+
 ### App enumeration
 #### Get all application objects registered using the current tenant.
 ```
