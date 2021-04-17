@@ -1240,6 +1240,7 @@ MATCH p = (n)-[r:AZOwns]->(g:AZGroup) RETURN p
 ```
 
 # Privilege escalation
+- These seperate commando's aren't complete. Have to go through all authenticated enumeration commands for quick wins!
 #### List all owned objects
 ```
 az ad signed-in-user list-owned-objects
@@ -1248,6 +1249,11 @@ az ad signed-in-user list-owned-objects
 #### Add a user to a group
 ```
 Add-AzureADGroupMember -ObjectId <GROUP ID> -RefObjectId <USER ID> -Verbose
+```
+
+#### List all accessible resources
+```
+Get-AzResource
 ```
 
 ## Automation account
