@@ -1327,6 +1327,7 @@ Get-AzRoleDefinition -Name "<ROLE DEFINITION NAME>"
   - Access to connections, key vaults from a runbook. 
   - Ability to run commands on on-prem VMs if hybrid workers are in use.
   - Ability to run commands on VMs using DSC in configuration management.
+  - A runbook often contains clear-text passwords for example psremoting!
 
 #### Get information on automation accounts
 ```
