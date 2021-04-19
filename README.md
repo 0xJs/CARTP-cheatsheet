@@ -3,7 +3,7 @@ Azure AD cheatsheet for the CARTP course
 
 # Sumarry
 * [General](#General)
-* [Recon](recon.md)
+* [Recon \ OSINT](recon.md)
 * [Initial access attacks](initial-access-attacks.md)
 * [Authenticated enumeration](Authenticated-enumeration.md )
 * [Privilege Escalation](privilege-escalation.md)
