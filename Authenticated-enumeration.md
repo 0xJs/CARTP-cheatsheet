@@ -15,7 +15,7 @@
   * [Using tokes with CLI Tools - AZ PowerShell](#Using-tokes-with-CLI-Tools---AZ-PowerShell)
   * [Using tokes with CLI Tools - az cli](#Using-tokes-with-CLI-Tools---az-cli)
   * [Stealing tokens](#Stealing-tokens)
-  * [Using tokes with AzureAD module](#Using-tokes-with AzureAD-module)
+  
   * [Using tokens with API's - management](#Using-tokens-with-API's---management)
   * [Abusing tokens](#Abusing-tokens)
 * [Tools](#Tools)
@@ -23,7 +23,7 @@
   * [Stormspotter](#Stormspotter)
   * [Bloodhound / Azurehound](#Bloodhound-/-Azurehound)
 
-s
+
 ## Enumeration through Azure portal
 #### Login azure portal
 Login to the azure portal with successfull attacks https://portal.azure.com/
