@@ -800,14 +800,15 @@ Supported tokens - aad-graph, arm, batch, data-lake, media, ms-graph, oss-rdbms
 az account get-access-token --resource-type ms-graph 
 ```
 
-### Stealing tokens from az cli
+### Stealing tokens
+#### Stealing tokens from az cli
 - az cli stores access tokens in clear text in ```accessTokens.json``` in the directory ```C:\Users\<username>\.Azure```
 - We can read tokens from the file, use them and request new ones too!
 - azureProfile.json in the same directory contains information about subscriptions. 
 - You can modify accessTokens.json to use access tokens with az cli but better to use with Az PowerShell or the Azure AD module.
 - To clear the access tokens, always use az logout
 
-### Stealing tokens from az powershell
+#### Stealing tokens from az powershell
 - Az PowerShell stores access tokens in clear text in ```TokenCache.dat``` in the directory ```C:\Users\<username>\.Azure```
 - It also stores ServicePrincipalSecret in clear-text in AzureRmContext.jsonif a service principal secret is used to authenticate. 
 - Another interesting method is to take a process dump of PowerShell and looking for tokens in it!
