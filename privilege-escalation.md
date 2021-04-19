@@ -4,11 +4,12 @@
 * [Privesc enumeration](#Privesc-enumeration)
 * [Automation account](#Automation-account)
 * [Command execution on a VM](#Command-execution-on-a-VM)
-* [](#)
-* [](#)
-* [](#)
-* [](#)
-* [](#)
+* [Getting credentials](#Getting-credentials)
+  * [Stealing tokens](#Stealing-tokens)
+  * [Keyvault](#Keyvault)
+  * [Mimikatz](#Mimikatz)
+  * [Powershell History](#Powershell-History)
+* [Reset password](#Reset-password)
 
 ## Privesc enumeration
 #### List all owned objects
@@ -170,6 +171,11 @@ cat C:\Users\<USER>\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\Cons
 - Another interesting method is to take a process dump of PowerShell and looking for tokens in it!
 - Users can save tokens using Save-AzContext, look out for them! Search for Save-AzContext in PowerShell console history!
 - Always use Disconnect-AzAccount!!
+
+### Requesting tokens once logged in
+```
+
+```
 
 ### Keyvault
 #### Get keyvault access token
