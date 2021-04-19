@@ -23,7 +23,7 @@
   * [Stormspotter](#Stormspotter)
   * [Bloodhound / Azurehound](#Bloodhound-/-Azurehound)
 
-
+s
 ## Enumeration through Azure portal
 #### Login azure portal
 Login to the azure portal with successfull attacks https://portal.azure.com/
