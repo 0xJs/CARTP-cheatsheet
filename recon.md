@@ -2,7 +2,6 @@
 
 * [Manually](#Manually)
 * [AADinternals](#AADinternals)
-* 
 
 ### Manually
 #### Get tenant name and fedaration (If azure tenant is in use)
