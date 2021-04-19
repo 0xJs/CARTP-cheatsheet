@@ -15,7 +15,7 @@
   * [Using tokes with CLI Tools - AZ PowerShell](#Using-tokes-with-CLI-Tools---AZ-PowerShell)
   * [Using tokes with CLI Tools - az cli](#Using-tokes-with-CLI-Tools---az-cli)
   * [Stealing tokens](#Stealing-tokens)
-  
+  * [Using tokes with AzureAD module](#Using-tokes-with-AzureAD-module)
   * [Using tokens with API's - management](#Using-tokens-with-API's---management)
   * [Abusing tokens](#Abusing-tokens)
 * [Tools](#Tools)
