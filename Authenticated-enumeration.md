@@ -1,4 +1,17 @@
 # Authenticated enumeration
+* [Enumerating through Azure Portal](#Enumeration-through-Azure-portal)
+* [Enumeration using AzureAD Module](Enumeration-using-AzureAD-Module)
+  * [User enumeration](User-enumeration)
+  * [Group enumeration](Group-enumeration)
+  * [Role enumeration](Role-enumeration)
+  * [Devices enumeration](Devices-enumeration)
+  * [Administrative-unit Enumeration](Administrative-unit-enumeration)
+  * [App enumeration](App-enumeration)
+  * [Service-principals enumeration](Service-principals-enumeration)
+* [Enumeration using Az powershell](Enumeration-using-Az-powershell)
+* []()
+* []()
+
 ## Enumeration through Azure portal
 #### Login azure portal
 Login to the azure portal with successfull attacks https://portal.azure.com/
@@ -198,7 +211,7 @@ Get-AzureADUserRegisteredDevice -ObjectId michaelmbarron@defcorphq.onmicrosoft.c
 Get-AzureADDevice -All $true | ?{$_.IsCompliant -eq "True"} 
 ```
 
-### Administrative-unit Enumeration
+### Administrative-unit enumeration
 #### List the administrative units
 ```
 Get-AzureADMSAdministrativeUnit
