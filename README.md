@@ -7,7 +7,7 @@ Azure AD cheatsheet for the CARTP course
 * [Initial access attacks](initial-access-attacks.md)
 * [Authenticated enumeration](authenticated_enumeration.md)
 * [Privilege Escalation](privilege_escalation.md)
-* [Persistence](persistence.md)
+* [Building Persistence](building-persistence.md)
 
 # General
 #### Access C disk of a computer (check local admin)
