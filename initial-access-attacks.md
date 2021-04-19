@@ -1,5 +1,14 @@
 # Initial access attacks
-## Password spray
+
+* [Password spraying](#Password-spraying)
+* [Illicit Consent Grant phishing](#Illicit-Consent-Grant-phishing)
+* [Insecure file upload](#Insecure-file-upload)
+* [Server Side Template Injection](#Server-Side-Template-Injection)
+* [OS Command injection](#OS-Command-injection)
+* [Storage account](#Storage-account)
+* [Phishing Evilginx2](#Phishing-Evilginx2)
+
+## Password spraying
 - https://github.com/dafthack/MSOLSpray
 - https://github.com/ustayready/fireprox
 ```
