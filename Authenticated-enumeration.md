@@ -946,7 +946,8 @@ $RequestParams = @{
 Add-AzADAppSecret -GraphToken $graphtoken -Verbose
 ```
 
-### Roadtoals
+## Tools
+### Roadtools
 https://github.com/dirkjanm/ROADtools
 - Enumeration using RoadRecon includes three steps
   – Authentication
