@@ -5,7 +5,7 @@ Azure AD cheatsheet for the CARTP course
 * [General](#General)
 * [Recon](recon.md)
 * [Initial access attacks](initial-access-attacks.md)
-* [Authenticated enumeration](authenticated-enumeration.md)
+* [Authenticated enumeration](Authenticated-enumeration.md )
 * [Privilege Escalation](privilege-escalation.md)
 * [Building Persistence](building-persistence.md)
 
