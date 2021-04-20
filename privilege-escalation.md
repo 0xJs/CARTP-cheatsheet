@@ -37,6 +37,12 @@ Get-AzRoleAssignment -Scope <RESOURCE ID>
 Get-AzRoleDefinition -Name "<ROLE DEFINITION NAME>"
 ```
 
+#### Check if secrets (application passwords) can be added to all enterprise applications
+```
+. .\Add-AzADAppSecret.ps1
+Add-AzADAppSecret -GraphToken $graphtoken -Verbose
+```
+
 ## Automation account
 - Automation Account comes very handy in privilege escalation:
   - Run As account is by default contributor on the current subscription and possible to have contributor permissions on other subscriptions in the tenant.   
