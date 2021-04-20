@@ -17,11 +17,6 @@
 az ad signed-in-user list-owned-objects
 ```
 
-#### Add a user to a group
-```
-Add-AzureADGroupMember -ObjectId <GROUP ID> -RefObjectId <USER ID> -Verbose
-```
-
 #### List all accessible resources
 ```
 Get-AzResource
@@ -41,6 +36,11 @@ Get-AzRoleDefinition -Name "<ROLE DEFINITION NAME>"
 ```
 . .\Add-AzADAppSecret.ps1
 Add-AzADAppSecret -GraphToken $graphtoken -Verbose
+```
+
+#### Add a user to a group
+```
+Add-AzureADGroupMember -ObjectId <GROUP ID> -RefObjectId <USER ID> -Verbose
 ```
 
 ## Automation account
