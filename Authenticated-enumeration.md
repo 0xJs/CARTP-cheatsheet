@@ -13,7 +13,7 @@
 * [Enumeration using Azure CLI](#Enumeration-using-Azure-CLI)
 * [Using Azure tokens](#Using-Azure-tokens)
   * [Using tokes with CLI Tools - AZ PowerShell](#Using-tokes-with-CLI-Tools---AZ-PowerShell)
-  * [Using tokes with CLI Tools - Azure CLI(#Using-tokes-with-CLI-Tools---Azure-CLI)
+  * [Using tokes with CLI Tools - Azure CLI](#Using-tokes-with-CLI-Tools---Azure-CLI)
   * [Stealing tokens](#Stealing-tokens)
   * [Using tokes with AzureAD module](#Using-tokes-with-AzureAD-module)
   * [Using tokens with API's - management](#Using-tokens-with-API's---management)
