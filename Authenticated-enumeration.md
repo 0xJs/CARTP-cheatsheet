@@ -755,11 +755,11 @@ az keyvault list
 az storage account list
 ```
 
-
-
 ## Using Azure tokens
 - Both Az PowerShell and AzureAD modules allow the use of Access tokens for authentication.
 - Usually, tokens contain all the claims (including that for MFA and Conditional Access etc.) so they are useful in bypassing such security controls.
+
+### Using tokes with CLI Tools - AZ PowerShell
 #### Request access token
 ```
 Get-AzAccessToken
@@ -767,7 +767,7 @@ Get-AzAccessToken
 ```
 
 #### Request an access token for AAD Graph to access Azure AD. 
-Supported tokens - AadGraph, AnalysisServices, Arm, Attestation, Batch, DataLake, KeyVault, OperationalInsights, ResourceManager, Synapse
+- Supported tokens - AadGraph, AnalysisServices, Arm, Attestation, Batch, DataLake, KeyVault, OperationalInsights, ResourceManager, Synapse
 ```
 Get-AzAccessToken -ResourceTypeName AadGraph
 ```
@@ -777,7 +777,6 @@ Get-AzAccessToken -ResourceTypeName AadGraph
 (Get-AzAccessToken -Resource "https://graph.microsoft.com").Token
 ```
 
-### Using tokes with CLI Tools - AZ PowerShell
 #### Use the access token
 ```
 Connect-AzAccount -AccountId test@defcorphq@onmicrosoft.com -AccessToken eyJ0eXA...
