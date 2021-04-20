@@ -982,12 +982,6 @@ $RequestParams = @{
 (Invoke-RestMethod @RequestParams).value
 ```
 
-#### Check if secrets (application passwords) can be added to all enterprise applications
-```
-. .\Add-AzADAppSecret.ps1
-Add-AzADAppSecret -GraphToken $graphtoken -Verbose
-```
-
 ## Tools
 ### Roadtools
 https://github.com/dirkjanm/ROADtools
