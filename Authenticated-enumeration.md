@@ -13,7 +13,7 @@
 * [Enumeration using Azure CLI](#Enumeration-using-Azure-CLI)
 * [Using Azure tokens](#Using-Azure-tokens)
   * [Using tokes with CLI Tools - AZ PowerShell](#Using-tokes-with-CLI-Tools---AZ-PowerShell)
-  * [Using tokes with CLI Tools - az cli](#Using-tokes-with-CLI-Tools---az-cli)
+  * [Using tokes with CLI Tools - Azure CLI(#Using-tokes-with-CLI-Tools---Azure-CLI)
   * [Stealing tokens](#Stealing-tokens)
   * [Using tokes with AzureAD module](#Using-tokes-with-AzureAD-module)
   * [Using tokens with API's - management](#Using-tokens-with-API's---management)
@@ -791,17 +791,12 @@ Connect-AzAccount -AccountId test@defcorphq@onmicrosoft.com -AccessToken eyJ0eXA
 Connect-AzAccount -AccountId test@defcorphq@onmicrosoft.com -AccessToken eyJ0eXA... -Tenantid <Tenant ID>
 ```
 
-### Using tokes with CLI Tools - az cli
-az cli can request a token but cannot use it!
+### Using tokes with CLI Tools - Azure CLI
+Azure CLI can request a token but cannot use it!
 
 #### Request an access token (ARM)
 ```
 az account get-access-token
-```
-
-#### Request a token for azure graph
-```
-az account get-access-token --resource-type aad-graph
 ```
 
 #### Request an access token
