@@ -178,7 +178,7 @@ Get-AzureADDirectoryRole
 Get-AzureADDirectoryRole -Filter "DisplayName eq 'Global Administrator'" | Get-AzureADDirectoryRoleMember
 ```
 
-### List custom roles
+#### List custom roles
 ```
 Import-Module .\AzureADPreview.psd1
 $creds = Get-Credential
