@@ -758,6 +758,9 @@ az storage account list
 ## Using Azure tokens
 - Both Az PowerShell and AzureAD modules allow the use of Access tokens for authentication.
 - Usually, tokens contain all the claims (including that for MFA and Conditional Access etc.) so they are useful in bypassing such security controls.
+- Office 365 stealer steals a token for the Graph API with the permissions that are registered.
+- For managed identities check the IDENTITY_ENDPOINT to see which token it is.
+- Can also use https://jwt.io or https://jwt.ms to see what token it is.
 
 ### Stealing tokens
 #### Stealing tokens from az cli
