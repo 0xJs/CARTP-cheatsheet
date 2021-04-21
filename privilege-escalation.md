@@ -12,6 +12,12 @@
 * [Reset password](#Reset-password)
 
 ## Privesc enumeration
+#### Get context of current user
+```
+az ad signed-in-user show
+Get-AzContext
+```
+
 #### List all owned objects
 ```
 az ad signed-in-user list-owned-objects
