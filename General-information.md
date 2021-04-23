@@ -27,7 +27,23 @@
   - Managed Identity uses Azure AD tokens to access other resources (like key vaults, storage accounts) that support Azure AD authentication. 
   - It is a service principal of special type that can be used with Azure resources. 
   - Managed Identity can be system-assigned (tied to a resource and cannot be shared with other resources) or user-assigned (independent life cycle and can be share across resources).
-- Azure Resource manager
+- Azure Resource manager (ARM)
   - It is the client neutral deployment and management service for Azure that is used for lifecycle management (creating, updating and deleting) and access control of of resources.
   - ARM templates can be used for consistent and dependency-defined redeployment of resources.
-- Note: A global administration can always elevate their privileges to the Root management group
+- Azure RBAC Roles
+  - Owner: Full access to all resources and can manage access for other users.
+  - Contributor: Full access to all resources, cannot manage access.
+  - Reader: View all resources
+  - User Access Administrator: View all recources and can manage access for other users.  
+- Azure AD roles
+  - Global administrator is the most well-known and all powerful administrator role.
+  - Global Administrator has the ability to 'elevate' to User Access Administrator Azure role to the root management group.
+- Default User Permissions, A normal user has many interesting permissions in Azure AD!
+  -   Read all users, Groups, Applications, Devices, Roles, Subscriptions, and their public properties
+  -   Invite Guests
+  -   Create Security groups
+  -   Read non-hidden Group memberships
+  -   Add guests to Owned groups
+  -   Create new application
+  -   Add up to 50 devices to Azure
+
