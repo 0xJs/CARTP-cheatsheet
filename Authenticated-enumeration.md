@@ -23,6 +23,11 @@
   * [Stormspotter](#Stormspotter)
   * [Bloodhound / Azurehound](#Bloodhound-/-Azurehound)
 
+# General
+- The three main tools used to enumerate
+  - AzureAD Module. Syntax used is \*AzureAD\* 
+  - Azure Powershell. Syntax used is \*Az\* and \*AzAd\*
+  - Azure CLI. Syntax used is \*az \* (Az space)
 
 ## Enumeration through Azure portal
 #### Login azure portal
