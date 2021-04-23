@@ -27,7 +27,7 @@
   - Managed Identity uses Azure AD tokens to access other resources (like key vaults, storage accounts) that support Azure AD authentication. 
   - It is a service principal of special type that can be used with Azure resources. 
   - Managed Identity can be system-assigned (tied to a resource and cannot be shared with other resources) or user-assigned (independent life cycle and can be share across resources).
--Azure Resource manager
+- Azure Resource manager
   - It is the client neutral deployment and management service for Azure that is used for lifecycle management (creating, updating and deleting) and access control of of resources.
   - ARM templates can be used for consistent and dependency-defined redeployment of resources.
 - Note: A global administration can always elevate their privileges to the Root management group
