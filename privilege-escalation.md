@@ -1,6 +1,4 @@
 # Privilege escalation
-- These seperate commando's aren't complete. Have to go through all authenticated enumeration commands for quick wins!
-
 * [Privesc enumeration](#Privesc-enumeration)
 * [Automation account](#Automation-account)
 * [Command execution on a VM](#Command-execution-on-a-VM)
