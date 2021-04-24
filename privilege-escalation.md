@@ -10,7 +10,6 @@
   * [Mimikatz](#Mimikatz)
   * [Powershell History](#Powershell-History)
 * [Reset password](#Reset-password)
-* [Pass the certificate](#Pass-the-certificate)
 
 ## Privesc enumeration
 #### Get context of current user
