@@ -1,4 +1,15 @@
 # Lateral movement
+
+* [Pass the certificate](#Pass-the-certificate)
+  * [Pass the PRT](#Pass-the-PRT) 
+* [Intune](#Intune)
+* [Abusing dynamic groups](#Abusing-dynamic-groups)
+* [Application proxy abuse](#Application-proxy-abuse)
+* [Hybrid Identity](#Hybrid Identity)
+  * [Password Hash Sync (PHS) Abuse](#Password-Hash-Sync-(PHS)-Abuse)
+  * [Pass Through Authentication (PTA) Abuse](#Pass-Through-Authentication-(PTA)-Abuse)
+  * [Federation (ADFS)](#Federation-(ADFS))
+
 ## Pass the certificate
 - To go from Azure AD machine to other Azure AD machine if the user has administrative access to other machines.
 
