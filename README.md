@@ -8,7 +8,7 @@ Azure AD cheatsheet for the CARTP course
 * [Authenticated enumeration](Authenticated-enumeration.md )
 * [Privilege Escalation](privilege-escalation.md)
 * [Cloud to On-Prem Lateral Movement](Cloud-to-OnPrem-lateral-movement.md)
-* [Building Persistence](building-persistence.md)
+* [Persistence](persistence.md)
 
 # General
 #### Access C disk of a computer (check local admin)
