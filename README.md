@@ -7,7 +7,7 @@ Azure AD cheatsheet for the CARTP course
 * [Initial access attacks](initial-access-attacks.md)
 * [Authenticated enumeration](Authenticated-enumeration.md )
 * [Privilege Escalation](privilege-escalation.md)
-* [Cloud to On-Prem Lateral Movement](Cloud-to-OnPrem-lateral-movement.md)
+* [Cloud <-> On-Prem Lateral Movement](Cloud-OnPrem-lateral-movement.md)
 * [Persistence](persistence.md)
 
 # General
