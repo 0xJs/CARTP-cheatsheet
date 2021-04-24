@@ -1,10 +1,13 @@
 # Lateral movement
 
+## Azure AD --> On-prem
 * [Pass the certificate](#Pass-the-certificate)
   * [Pass the PRT](#Pass-the-PRT) 
 * [Intune](#Intune)
 * [Abusing dynamic groups](#Abusing-dynamic-groups)
 * [Application proxy abuse](#Application-proxy-abuse)
+
+## On-Prem --> Azure AD
 * [Hybrid Identity](#Hybrid-Identity)
   * [Password Hash Sync (PHS) Abuse](#Password-Hash-Sync-(PHS)-Abuse)
   * [Pass Through Authentication (PTA) Abuse](#Pass-Through-Authentication-(PTA)-Abuse)
