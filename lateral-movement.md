@@ -5,7 +5,7 @@
 * [Intune](#Intune)
 * [Abusing dynamic groups](#Abusing-dynamic-groups)
 * [Application proxy abuse](#Application-proxy-abuse)
-* [Hybrid Identity](#Hybrid Identity)
+* [Hybrid Identity](#Hybrid-Identity)
   * [Password Hash Sync (PHS) Abuse](#Password-Hash-Sync-(PHS)-Abuse)
   * [Pass Through Authentication (PTA) Abuse](#Pass-Through-Authentication-(PTA)-Abuse)
   * [Federation (ADFS)](#Federation-(ADFS))
