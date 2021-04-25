@@ -30,3 +30,11 @@ $host.ui.RawUI.WindowTitle = "<NAME>"
 ```
 Copy-Item -ToSession $sess -Path <PATH> -Destination <DEST> -verbose
 ```
+
+#### Save Credentials
+```
+$creds = get-credential
+
+$password = ConvertTo-SecureString '<PASSWORD>' -AsPlainText -Force
+$creds = New-Object System.Management.Automation.PSCredential('<USERNAME>', $password)
+```
