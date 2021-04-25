@@ -4,7 +4,6 @@
 * [Pass the certificate](#Pass-the-certificate)
 * [Pass the PRT](#Pass-the-PRT) 
 * [Intune](#Intune)
-* [Abusing dynamic groups](#Abusing-dynamic-groups)
 * [Application proxy abuse](#Application-proxy-abuse)
 
 ## On-Prem --> Azure AD
@@ -95,9 +94,6 @@ Add-LocalGroupMember -Group Administrators -Member student38
 ```
 - Select `Run script in 64 bit PowerShell Host`
 - On the assignment page select "Add all users" and "add all devices"
-
-## Abusing dynamic groups
-- By default, any user can invite guests in Azure AD. If a dynamic group rule allows adding users based on the attributes that a guest user can modify, it will result in abuse of this feature. For example based on EMAIL ID and join as guest that matches that rule.
 
 ## Application proxy abuse
 - The application behind the proxy may have vulnerabilities to access the on-prem environment.
