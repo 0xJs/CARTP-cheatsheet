@@ -12,6 +12,7 @@
 * [Add credentials to enterprise applications](#Add-credentials-to-enterprise-applications)
 * [Deployments](#Deployments)
 * [Storage account](#Storage-account)
+* [Abusing dynamic groups](#Abusing-dynamic-groups)
 * [Arm Templates History](#Arm-Templates-History)
 * [Function apps continuous deployment](#Function-apps-continuous-deployment)
 
@@ -316,6 +317,19 @@ Get-AzStorageContainer -Context (Get-AzStorageAccount -Name <NAME> -ResourceGrou
 
 #### Check using the "Storage Explorer" application! Might be possible then!
 
+## Abusing dynamic groups
+- By default, any user can invite guests in Azure AD. If a dynamic group rule allows adding users based on the attributes that a guest user can modify, it will result in abuse of this feature. For example based on EMAIL ID and join as guest that matches that rule.
+- Login to the portal and check the groups. Is there any dynamic group?
+- Click on the dynamic group and select "Dynamic membership rules". Is it possible to invite a user that complies to the rule?
+- Go to Users and select "New Guest User"
+- Open the user's profile and click on "(manage)" under invitation accepted. Select YES on resend invite and copy the URL.
+- Open the URL in a private browser and login and accept the permissions.
+- Connect to the tenant with AzureAD
+- Set the secondary email for the user (Get the objectID of the user from the portal where we made the guest)
+```
+Set-AzureADUser -ObjectId 4a3395c9-be40-44ba-aff2-be502edd9619 -OtherMails vendorx@defcorpextcontractors.onmicrosoft.com -Verbose
+```
+- Check if the user is added to the dynamic group (Might take a bit)
 
 ## Arm Templates History
 ```
