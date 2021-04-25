@@ -25,3 +25,8 @@ ls \\<COMPUTERNAME>\c$
 ```
 $host.ui.RawUI.WindowTitle = "<NAME>"
 ```
+
+#### Copy item through PSSession
+```
+Copy-Item -ToSession $sess -Path <PATH> -Destination <DEST> -verbose
+```
