@@ -11,7 +11,7 @@
 * [Reset password of other users](#Reset-password-of-other-users)
 * [Add credentials to enterprise applications](#Add-credentials-to-enterprise-applications)
 * [Deployments](#Deployments)
-* [Storage account](#Storage account)
+* [Storage account](#Storage-account)
 * [Arm Templates History](#Arm-Templates-History)
 * [Function apps continuous deployment](#Function-apps-continuous-deployment)
 
