@@ -66,12 +66,12 @@ New-AADIntUserPRTToken -RefreshToken $PRT -SessionKey $SessionKey -GetNonce
 ```
 
 #### Copy the value from above command and use it with a web browser
-– Open the Browser in Incognito mode
-– Go to https://login.microsoftonline.com/login.srf
-– Press F12 (Chrome dev tools) -> Application -> Cookies
-– Clear all cookies and then add one named `x-ms-RefreshTokenCredential` for https://login.microsoftonline.com and set its value to that retrieved from AADInternals
-– Mark HTTPOnly and Secure for the cookie
-– Visit https://login.microsoftonline.com/login.srf again and we will get access as the user!
+- Open the Browser in Incognito mode
+- Go to https://login.microsoftonline.com/login.srf
+- Press F12 (Chrome dev tools) -> Application -> Cookies
+- Clear all cookies and then add one named `x-ms-RefreshTokenCredential` for https://login.microsoftonline.com and set its value to that retrieved from AADInternals
+- Mark HTTPOnly and Secure for the cookie
+- Visit https://login.microsoftonline.com/login.srf again and we will get access as the user!
 
 
 ## Intune
