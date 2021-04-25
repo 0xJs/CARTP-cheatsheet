@@ -12,6 +12,7 @@
   * [Pass Through Authentication (PTA) Abuse](#Pass-Through-Authentication-(PTA)-Abuse)
   * [Federation (ADFS)](#Federation-(ADFS))
 
+# Azure AD --> On-prem
 ## Pass the certificate
 - To go from Azure AD machine to other Azure AD machine if the user has administrative access to other machines.
 
@@ -114,6 +115,7 @@ Get-AzureADServicePrincipal -All $true | ?{$_.DisplayName -eq "Finance Managemen
 Get-ApplicationProxyAssignedUsersAndGroups -ObjectId <OBJECT ID OF SERVICE PRINCIPAL>
 ```
 
+# On-Prem --> Azure AD
 ## Hybrid Identity
 ## Password Hash Sync (PHS) Abuse
 - Check if there is an account name with MSOL_<INSTALLATION ID>. This user has DCSYNC rights.
