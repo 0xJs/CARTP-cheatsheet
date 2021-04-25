@@ -7,6 +7,7 @@
   * [Keyvault](#Keyvault)
   * [Mimikatz](#Mimikatz)
   * [Powershell History](#Powershell-History)
+  * [Transcript](#Transcript)
 * [Reset password of other users](#Reset-password-of-other-users)
 * [Add credentials to enterprise applications](#Add-credentials-to-enterprise-applications)
 * [Deployments](#Deployments)
@@ -246,6 +247,11 @@ Invoke-Mimikatz -Command '"token::elevate" "lsadump::secrets"'
 ### Powershell History
 ```
 type C:\Users\<USER>\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt
+```
+
+### Transcript
+```
+type C:\Transcripts\20210422\PowerShell_transcript.DESKTOP-M7C1AFM.6sZJrDuN.20210422230739.txt
 ```
 
 ## Reset password of other users
