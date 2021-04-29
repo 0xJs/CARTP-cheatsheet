@@ -331,12 +331,17 @@ Set-AzureADUser -ObjectId 4a3395c9-be40-44ba-aff2-be502edd9619 -OtherMails vendo
 ```
 - Check if the user is added to the dynamic group (Might take a bit)
 
-## Arm Templates History
-```
-
-```
+## Arm Templates and Deployment History
+- Any user with permissions `Microsoft.Resources/deployments/read` and `Microsoft.Resources/subscriptions/resourceGroups/read` can read the deployment history.
+- Login to the azure portal
+- Go to the deployments under settings and check the template for passwords or anything!
+- Not sure if its possible by commands in any module!
 
 ## Function apps continuous deployment
-```
+- In case continuous deployment is used, a source code update triggers a deployment to Azure. 
+- Following source code locations are supported
+  - Azure Repos
+  - GitHub
+  - Bitbucket
+- May be able to escalate privileges if we can own a continuous deployment and execute code on anything or add users!
 
-```
