@@ -1,7 +1,9 @@
 # Lateral movement
 
-## Azure AD --> On-prem
+## Azure AD machine --> Azure AD
 * [Pass the certificate](#Pass-the-certificate)
+
+## Azure AD --> On-prem
 * [Pass the PRT](#Pass-the-PRT) 
 * [Intune](#Intune)
 * [Application proxy abuse](#Application-proxy-abuse)
