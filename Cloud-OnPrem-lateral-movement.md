@@ -1,6 +1,6 @@
 # Lateral movement
 
-## Azure AD machine --> Azure AD
+## Azure AD machine --> Azure (or another Azure AD Machine)
 * [Pass the certificate](#Pass-the-certificate)
 * [Pass the PRT](#Pass-the-PRT) 
 
