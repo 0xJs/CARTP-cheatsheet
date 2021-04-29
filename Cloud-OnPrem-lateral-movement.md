@@ -10,9 +10,9 @@
 
 ## On-Prem --> Azure AD
 * [Azure AD Connect](#Azure-AD-Connect)
-  * [Password Hash Sync (PHS) Abuse](#Password-Hash-Sync-(PHS)-Abuse)
-  * [Pass Through Authentication (PTA) Abuse](#Pass-Through-Authentication-(PTA)-Abuse)
-  * [Federation (ADFS)](#Federation-(ADFS))
+  * [Password Hash Sync (PHS) Abuse](#Password-Hash-Sync-Abuse)
+  * [Pass Through Authentication (PTA) Abuse](#Pass-Through-Authentication-Abuse)
+  * [Federation (ADFS)](#Federation-ADFS)
 
 # Azure AD --> On-prem
 ## Pass the certificate
@@ -128,7 +128,7 @@ Invoke-Mimikatz -Command '"token::elevate" "lsadump::secrets"'
 - Check if there is an account name with `MSOL_<INSTALLATION ID>`. This user has DCSYNC rights. (or `AAD_` if installed on a DC)
 - Command to check if AD connect is installed on the server `Get-ADSyncConnector`
 
-## Password Hash Sync (PHS) Abuse
+## Password Hash Sync Abuse
 - Account with `SYNC_` is created in Azure AD and can reset any users password in Azure AD.
 - Passwords for both the accounts are stored in SQL server on the server where Azure AD Connect is installed and it is possible to extract them in clear-text if you have admin privileges on the server.
 
@@ -188,7 +188,7 @@ Set-AADIntUserPassword -CloudAnchor "User_10caa362-7d18-48c9-a45b-9c3a78f3a96b" 
 
 - Access Azure portal using the new password.
 
-## Pass Through Authentication (PTA) Abuse
+## Pass Through Authentication PTA Abuse
 - Once we have admin access to an Azure AD connect server running PTA agent.
 - Not reliable method to check if PTA is used, Check if module is available ```Get-Command -Module PassthroughAuthPSModule```
 - Once the backdoor is installed, we can authenticate as any user synced from on-prem without knowing the correct password!
@@ -210,7 +210,7 @@ Get-AADIntPTASpyLog -DecodePasswords
 Install-AADIntPTASpy
 ```
 
-## Federation (ADFS)
+## Federation-ADFS
 - Golden SAML Attack
 #### Get the ImmutableID
 ```
