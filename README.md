@@ -11,6 +11,8 @@ Azure AD cheatsheet for the CARTP course
 * [Persistence](persistence.md)
 
 # General
+- List of Microsoft portals https://msportals.io/
+- 
 #### Access C disk of a computer (check local admin)
 ```
 ls \\<COMPUTERNAME>\c$
