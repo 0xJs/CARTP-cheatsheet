@@ -190,9 +190,10 @@ Set-AADIntUserPassword -CloudAnchor "User_10caa362-7d18-48c9-a45b-9c3a78f3a96b" 
 
 ## Pass Through Authentication (PTA) Abuse
 - Once we have admin access to an Azure AD connect server running PTA agent.
-- Once the backdoor is installed, we can authenticate as any user synced from onprem without knowing the correct password!
+- Not reliable method to check if PTA is used, Check if module is available ```Get-Command -Module PassthroughAuthPSModule```
+- Once the backdoor is installed, we can authenticate as any user synced from on-prem without knowing the correct password!
 
-#### Install a backdoor (needs to be run ad administrator
+#### Install a backdoor (needs to be run ad administrator)
 ```
 Install-AADIntPTASpy
 ```
