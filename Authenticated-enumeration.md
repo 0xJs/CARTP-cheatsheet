@@ -26,8 +26,12 @@
 # General
 - The three main tools used to enumerate
   - AzureAD Module. Syntax used is ```*AzureAD*```
+    - Used to manage Azure AD.
+    - Only to interact with Azure AD, no access to Azure resources. 
   - Azure Powershell. Syntax used is ```*Az*``` and ```*AzAd*```
+    - Used to manage Azure resources.
   - Azure CLI. Syntax used is ```*az *``` (Az space)
+    - Used for both Azure AD and azure resources.
 
 ## Enumeration through Azure portal
 #### Login azure portal
