@@ -12,7 +12,10 @@ Azure AD cheatsheet for the CARTP course
 
 # General
 - List of Microsoft portals https://msportals.io/
-- 
+- Great resources
+  - https://pentestbook.six2dez.com/enumeration/cloud/azure
+  - https://github.com/Kyuu-Ji/Awesome-Azure-Pentest
+  - https://github.com/dafthack/CloudPentestCheatsheets/blob/master/cheatsheets/Azure.md
 #### Access C disk of a computer (check local admin)
 ```
 ls \\<COMPUTERNAME>\c$
