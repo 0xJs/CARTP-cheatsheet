@@ -2,9 +2,9 @@
 
 ## Azure AD machine --> Azure AD
 * [Pass the certificate](#Pass-the-certificate)
+* [Pass the PRT](#Pass-the-PRT) 
 
 ## Azure AD --> On-prem
-* [Pass the PRT](#Pass-the-PRT) 
 * [Intune](#Intune)
 * [Application proxy abuse](#Application-proxy-abuse)
 
