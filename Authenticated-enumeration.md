@@ -31,7 +31,7 @@
   - Azure Powershell. Syntax used is ```*Az*``` and ```*AzAd*```
     - Used to manage Azure resources.
   - Azure CLI. Syntax used is ```*az *``` (Az space)
-    - Used for both Azure AD and azure resources.
+    - Create and manage Azure Resources.
 
 ## Enumeration through Azure portal
 #### Login azure portal
