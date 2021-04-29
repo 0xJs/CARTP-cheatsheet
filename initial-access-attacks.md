@@ -17,6 +17,7 @@ Invoke-MSOLSpray -UserList C:\AzAD\Tools\validemails.txt -Password SuperVeryEasy
 ```
 
 #### Find valid emails
+- Explained in Recon or use the command below
 ```
 C:\Python27\python.exe o365creeper.py -f emails.txt -o validemails.txt
 ```
