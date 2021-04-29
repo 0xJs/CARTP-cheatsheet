@@ -4,7 +4,8 @@
 * [AADinternals](#AADinternals)
 
 ### Manually
-#### Get tenant name and fedaration (If azure tenant is in use)
+#### Get if tenant is in use and if fedaration is in use.
+- Federation with Azure AD or O365 enables users to authenticate using on-premises credentials and access all resources in cloud.
 ```
 https://login.microsoftonline.com/getuserrealm.srf?login=<USER>@<DOMAIN>&xml=1
 https://login.microsoftonline.com/getuserrealm.srf?login=root@defcorphq.onmicrosoft.com&xml=1
@@ -15,6 +16,7 @@ https://login.microsoftonline.com/getuserrealm.srf?login=root@defcorphq.onmicros
 https://login.microsoftonline.com/<DOMAIN>/.well-known/openid-configuration
 https://login.microsoftonline.com/defcorphq.onmicrosoft.com/.well-known/openid-configuration
 ```
+
 ### AADinternals
 https://github.com/Gerenios/AADInternals
 https://o365blog.com/aadinternals/
@@ -45,12 +47,12 @@ Invoke-AADIntReconAsOutsider -DomainName defcorphq.onmicrosoft.com
 ```
 
 #### Check for Email ID's
-https://github.com/LMGsec/o365creeper
-
-Could gather list of emails from something like harvester or hunter.io or smth and validate them!
+- https://github.com/LMGsec/o365creeper
+- Could gather list of emails from something like harvester or hunter.io or smth and validate them!
 ```
 python o365creeper.py -f list_of_emails.txt -o validemails.txt
 ```
+- Possible to use https://github.com/nyxgeek/onedrive_user_enum (Non-lab-tool)
 
 #### Enumerate used services
 - https://github.com/NetSPI/MicroBurst
