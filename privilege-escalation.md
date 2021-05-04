@@ -227,17 +227,17 @@ Get-AzKeyVault
 
 #### Get info about a specific keyvault
 ```
-Get-AzKeyVault -VaultName ResearchKeyVault
+Get-AzKeyVault -VaultName <VAULT NAME>
 ```
 
 #### List the saved creds from keyvault
 ```
-Get-AzKeyVaultSecret -VaultName ResearchKeyVault -AsPlainText
+Get-AzKeyVaultSecret -VaultName <VAULT NAME> -AsPlainText
 ```
 
 #### Read creds from a keyvault
 ```
-Get-AzKeyVaultSecret -VaultName ResearchKeyVault -Name Reader -AsPlainText
+Get-AzKeyVaultSecret -VaultName <VAULT NAME> -Name <NAME> -AsPlainText
 ```
 
 #### Connect with the credentials found and enumerate further!
