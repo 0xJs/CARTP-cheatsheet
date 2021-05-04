@@ -17,6 +17,7 @@
 * [Function apps continuous deployment](#Function-apps-continuous-deployment)
 
 ## Privesc enumeration
+### When on a new machine
 #### Get context of current user
 ```
 az ad signed-in-user show
@@ -30,6 +31,14 @@ az ad signed-in-user list-owned-objects
 Get-AzureADUserOwnedObject -ObjectId <USER ID>
 ```
 
+#### Get access token
+Supported tokens = aad-graph, arm, batch, data-lake, media, ms-graph, oss-rdbms
+```
+az account get-access-token
+az account get-access-token --resource-type ms-graph 
+```
+
+### General
 #### List all accessible resources
 ```
 Get-AzResource
