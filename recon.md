@@ -49,6 +49,7 @@ Invoke-AADIntReconAsOutsider -DomainName defcorphq.onmicrosoft.com
 #### Check for Email ID's
 - https://github.com/LMGsec/o365creeper
 - Could gather list of emails from something like harvester or hunter.io or smth and validate them!
+- admin, root, test, contact (try those default for exam)
 ```
 python o365creeper.py -f list_of_emails.txt -o validemails.txt
 ```
