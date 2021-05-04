@@ -60,7 +60,7 @@ python o365creeper.py -f list_of_emails.txt -o validemails.txt
 - Edit the permutations.txt to add permutations such as career, hr, users, file and backup
 ```
 Import-Module MicroBurst.psm1 -Verbose
-Invoke-EnumerateAzureSubDomains -Base defcorphq -Verbose -Outputfile subdomains.txt
+Invoke-EnumerateAzureSubDomains -Base <DOMAIN NAME> -Verbose
 ```
 
 #### Enumerate Azureblobs
