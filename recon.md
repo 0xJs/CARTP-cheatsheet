@@ -2,6 +2,7 @@
 
 * [Manually](#Manually)
 * [AADinternals](#AADinternals)
+* [Microburst](#Microburst)
 
 ### Manually
 #### Get if tenant is in use and if fedaration is in use.
@@ -54,6 +55,7 @@ python o365creeper.py -f list_of_emails.txt -o validemails.txt
 ```
 - Possible to use https://github.com/nyxgeek/onedrive_user_enum (Non-lab-tool)
 
+## Microburst
 #### Enumerate used services
 - https://github.com/NetSPI/MicroBurst
 - Edit the permutations.txt to add permutations such as career, hr, users, file and backup
