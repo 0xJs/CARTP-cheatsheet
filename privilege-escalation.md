@@ -280,6 +280,7 @@ env
 curl "$IDENTITY_ENDPOINT?resource=https://management.azure.com/&api-version=2017-09-01" -H secret:$IDENTITY_HEADER
 ```
 
+#### Request access token for managed identity html file upload
 ```
 <?php 
 
