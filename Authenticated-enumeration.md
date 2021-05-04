@@ -794,6 +794,10 @@ az storage account list
 - Office 365 stealer steals a token for the Graph API with the permissions that are registered.
 - For managed identities check the IDENTITY_ENDPOINT to see which token it is.
 - Can also use https://jwt.io or https://jwt.ms to see what token it is.
+- Which token to use
+  - Access Token - Azure Resouces
+  - Graph Token - Azure AD
+  - Key Vault Token - Keyvault Access
 
 ### Stealing tokens
 #### Stealing tokens from az cli
