@@ -60,6 +60,7 @@ Get-AzRoleDefinition -Name "<ROLE DEFINITION NAME>"
 ```
 
 #### Add a user to a group
+- Required aad-graph token
 ```
 Add-AzureADGroupMember -ObjectId <GROUP ID> -RefObjectId <USER ID> -Verbose
 ```
