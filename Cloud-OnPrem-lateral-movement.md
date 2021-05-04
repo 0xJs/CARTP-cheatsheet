@@ -75,8 +75,6 @@ $SKey = [convert]::ToBase64String( [byte[]] ($ClearKey -replace '..', '0x$&,' -s
 New-AADIntUserPRTToken -RefreshToken $PRT -SessionKey $SKey –GetNonce
 ```
 
-- Can now also access portal.azure.com
-
 #### Copy the value from above command and use it with a web browser
 - Open the Browser in Incognito mode
 - Go to https://login.microsoftonline.com/login.srf
@@ -84,6 +82,7 @@ New-AADIntUserPRTToken -RefreshToken $PRT -SessionKey $SKey –GetNonce
 - Clear all cookies and then add one named `x-ms-RefreshTokenCredential` for https://login.microsoftonline.com and set its value to that retrieved from AADInternals
 - Mark HTTPOnly and Secure for the cookie
 - Visit https://login.microsoftonline.com/login.srf again and we will get access as the user!
+- Can now also access portal.azure.com
 
 
 ## Intune
