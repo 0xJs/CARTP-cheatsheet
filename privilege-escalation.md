@@ -361,6 +361,10 @@ Get-AzStorageContainer -Context (Get-AzStorageAccount -Name <NAME> -ResourceGrou
 - Connect to the tenant with AzureAD
 - Set the secondary email for the user (Get the objectID of the user from the portal where we made the guest)
 ```
+Get-AzureADMSGroup | Where-Object -Property GroupTypes -Match 'DynamicMembership' | fl *
+```
+
+```
 Set-AzureADUser -ObjectId 4a3395c9-be40-44ba-aff2-be502edd9619 -OtherMails vendorx@defcorpextcontractors.onmicrosoft.com -Verbose
 ```
 - Check if the user is added to the dynamic group (Might take a bit)
