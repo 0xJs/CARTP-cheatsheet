@@ -136,7 +136,7 @@ Connect-AzAccount -AccessToken $accesstoken -AccountId <CLIENT ID OR EMAIL>
 
 #### Get more information about the VM (networkprofile)
 ```
-Get-AzVM -Name bkpadconnect -ResourceGroupName Engineering | select -ExpandProperty NetworkProfile
+Get-AzVM -Name <VM NAME> -ResourceGroupName <RESOURCE GROUP NAME> | select -ExpandProperty NetworkProfile
 ```
 
 #### Get the network interface
@@ -151,7 +151,7 @@ Get-AzPublicIpAddress -Name bkpadconnectIP
 
 #### Check role assignments on the VM
 ```
-Get-AzRoleAssignment -Scope /subscriptions/b413826f-108d-4049-8c11-d52d5d388768/resourceGroups/RESEARCH/providers/Microsoft.Compute/virtualMachines/jumpvm
+Get-AzRoleAssignment -Scope <RESOURCE ID>
 ```
 
 #### Check the allowed actions of the role definition
@@ -161,7 +161,7 @@ Get-AzRoleDefinition -Name "<ROLE DEFINITION NAME>"
 
 #### Run a command on the VM
 ```
-Invoke-AzVMRunCommand -VMName bkpadconnect -ResourceGroupName Engineering -CommandId 'RunPowerShellScript' -ScriptPath 'C:\AzAD\Tools\adduser.ps1' -Verbose
+Invoke-AzVMRunCommand -VMName <VM NAME> -ResourceGroupName <RESOURCE GROUP NAME> -CommandId 'RunPowerShellScript' -ScriptPath 'C:\AzAD\Tools\adduser.ps1' -Verbose
 ```
 
 #### Contents of adduser.ps1
