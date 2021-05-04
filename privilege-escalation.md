@@ -65,6 +65,12 @@ Get-AzRoleDefinition -Name "<ROLE DEFINITION NAME>"
 Add-AzureADGroupMember -ObjectId <GROUP ID> -RefObjectId <USER ID> -Verbose
 ```
 
+#### Check for managed identity
+- print environment variables and check for IDENTITY_HEADER and IDENTITY_ENDPOINT 
+```
+env
+```
+
 ## Automation account
 - Automation Account comes very handy in privilege escalation:
   - Run As account is by default contributor on the current subscription and possible to have contributor permissions on other subscriptions in the tenant.   
