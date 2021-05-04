@@ -141,12 +141,12 @@ Get-AzVM -Name <VM NAME> -ResourceGroupName <RESOURCE GROUP NAME> | select -Expa
 
 #### Get the network interface
 ```
-Get-AzNetworkInterface -Name bkpadconnect368
+Get-AzNetworkInterface -Name <NETWORKINTERFACE>
 ```
 
 #### Query ID of public ip adress to get the public ip
 ```
-Get-AzPublicIpAddress -Name bkpadconnectIP
+Get-AzPublicIpAddress -Name <ID OF PUBLIC IP ADRESSES IN IPCONFIGURATION>
 ```
 
 #### Check role assignments on the VM
