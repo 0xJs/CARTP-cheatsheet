@@ -925,16 +925,16 @@ Headers = @{
 
 #### Get an access token for MS Graph. For example, list all the users
 ```
-$Token = 'eyJ0eXAi..'
-$URI = 'https://management.azure.com/subscriptions?api-version=2020-01-01'
+$Token = 'eyJ0eX..'
+$URI = 'https://graph.microsoft.com/v1.0/users'
 $RequestParams = @{
-Method = 'GET'
-Uri = $URI
-Headers = @{
-'Authorization' = "Bearer $Token"
+ Method = 'GET'
+ Uri = $URI
+ Headers = @{
+ 'Authorization' = "Bearer $Token"
+ }
 }
-}
-(Invoke-RestMethod @RequestParams).value
+(Invoke-RestMethod @RequestParams).value 
 ```
 
 ### Abusing tokens
