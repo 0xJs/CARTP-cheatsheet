@@ -46,15 +46,6 @@ Get-AADIntTenantDomains -Domain <DOMAIN>
 Invoke-AADIntReconAsOutsider -DomainName <DOMAIN>
 ```
 
-#### Check for Email ID's
-- https://github.com/LMGsec/o365creeper
-- Could gather list of emails from something like harvester or hunter.io or smth and validate them!
-- admin, root, test, contact (try those default for exam)
-```
-python o365creeper.py -f list_of_emails.txt -o validemails.txt
-```
-- Possible to use https://github.com/nyxgeek/onedrive_user_enum (Non-lab-tool)
-
 ## Microburst
 #### Enumerate used services
 - https://github.com/NetSPI/MicroBurst
@@ -70,3 +61,15 @@ Invoke-EnumerateAzureSubDomains -Base <SHORT DOMAIN NAME> -Verbose
 Import-Module ./Microburst.psm1
 Invoke-EnumerateAzureBlobs -Base <SHORT DOMAIN> -OutputFile azureblobs.txt
 ```
+
+## Password spray
+#### Check for Email ID's
+- https://github.com/LMGsec/o365creeper
+- Could gather list of emails from something like harvester or hunter.io or smth and validate them!
+- admin, root, test, contact (try those default for exam)
+```
+python o365creeper.py -f list_of_emails.txt -o validemails.txt
+```
+- Possible to use https://github.com/nyxgeek/onedrive_user_enum (Non-lab-tool)
+
+
