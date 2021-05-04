@@ -75,6 +75,8 @@ $SKey = [convert]::ToBase64String( [byte[]] ($ClearKey -replace '..', '0x$&,' -s
 New-AADIntUserPRTToken -RefreshToken $PRT -SessionKey $SKey –GetNonce
 ```
 
+- Can now also access portal.azure.com
+
 #### Copy the value from above command and use it with a web browser
 - Open the Browser in Incognito mode
 - Go to https://login.microsoftonline.com/login.srf
