@@ -27,23 +27,22 @@ import-module .\AADInternals.psd1
 
 ####  Get tenant name, authentication, brand name (usually same as directory name) and domain name
 ```
-Get-AADIntLoginInformation -UserName root@defcorphq.onmicrosoft.com
+Get-AADIntLoginInformation -UserName <RANDOM USER>@<DOMAIN>
 ```
 
 #### Get tenant ID
 ```
-Get-AADIntTenantID -Domain defcorphq.onmicrosoft.com
+Get-AADIntTenantID -Domain <DOMAIN>
 ```
 
 #### Get tenant domains
 ```
-Get-AADIntTenantDomains -Domain defcorphq.onmicrosoft.com 
-Get-AADIntTenantDomains -Domain deffin.onmicrosoft.com
+Get-AADIntTenantDomains -Domain <DOMAIN>
 ```
 
 #### Get all the information
 ```
-Invoke-AADIntReconAsOutsider -DomainName defcorphq.onmicrosoft.com
+Invoke-AADIntReconAsOutsider -DomainName <DOMAIN>
 ```
 
 #### Check for Email ID's
@@ -60,12 +59,12 @@ python o365creeper.py -f list_of_emails.txt -o validemails.txt
 - Edit the permutations.txt to add permutations such as career, hr, users, file and backup
 ```
 Import-Module MicroBurst.psm1 -Verbose
-Invoke-EnumerateAzureSubDomains -Base <DOMAIN NAME> -Verbose
+Invoke-EnumerateAzureSubDomains -Base <SHORT DOMAIN NAME> -Verbose
 ```
 
 #### Enumerate Azureblobs
 - add permutations to permutations.txt like common, backup, code in the misc directory.
 ```
 Import-Module ./Microburst.psm1
-Invoke-EnumerateAzureBlobs -Base defcorp -OutputFile azureblobs.txt
+Invoke-EnumerateAzureBlobs -Base <SHORT DOMAIN> -OutputFile azureblobs.txt
 ```
