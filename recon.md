@@ -3,6 +3,7 @@
 * [Manually](#Manually)
 * [AADinternals](#AADinternals)
 * [Microburst](#Microburst)
+* [Valid emails](#Valid-emails)
 
 ### Manually
 #### Get if tenant is in use and if fedaration is in use.
@@ -62,7 +63,7 @@ Import-Module ./Microburst.psm1
 Invoke-EnumerateAzureBlobs -Base <SHORT DOMAIN> -OutputFile azureblobs.txt
 ```
 
-## Password spray
+## Valid emails
 #### Check for Email ID's
 - https://github.com/LMGsec/o365creeper
 - Could gather list of emails from something like harvester or hunter.io or smth and validate them!
