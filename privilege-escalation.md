@@ -26,6 +26,8 @@ Get-AzContext
 #### List all owned objects
 ```
 az ad signed-in-user list-owned-objects
+
+Get-AzureADUserOwnedObject -ObjectId <USER ID>
 ```
 
 #### List all accessible resources
