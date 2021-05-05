@@ -29,7 +29,7 @@ Get-AzContext
 ```
 az ad signed-in-user list-owned-objects
 
-Get-AzureADUserOwnedObject -ObjectId <USER ID>
+Get-AzureADUserOwnedObject -ObjectId <ID>
 ```
 
 #### Get access token
@@ -93,19 +93,20 @@ Connect-AzAccount -AccessToken $accesstoken -GraphAccessToken $aadtoken -Account
 ```
 
 #### Get the role assigned of the automation accounts
-- Check for the Roledefinitionn
-```
-Get-AzRoleAssignment -Scope /subscriptions/b413826f-108d-4049-8c11-d52d5d388768/resourceGroups/Engineering/providers/Microsoft.Automation/automationAccounts/HybridAutomation
+- Check for the Roledefinition
+- Get the ID from ```az automation account list```
+````
+Get-AzRoleAssignment -Scope <ID>
 ```
 
 #### Check if a hybrid worker is in use by the automation account
 ```
-Get-AzAutomationHybridWorkerGroup -AutomationAccountName HybridAutomation -ResourceGroupName Engineering
+Get-AzAutomationHybridWorkerGroup -AutomationAccountName <NAME> -ResourceGroupName <NAME>
 ```
 
 #### Import Powershell runbook
 ```
-Import-AzAutomationRunbook -Name student38 -Path C:\AzAD\Tools\student38.ps1 -AutomationAccountName HybridAutomation -ResourceGroupName Engineering -Type PowerShell -Force -Verbose
+Import-AzAutomationRunbook -Name student38 -Path <PATH TO .ps1 FILE> -AutomationAccountName <NAME> -ResourceGroupName <NAME> -Type PowerShell -Force -Verbose
 ```
 
 #### Contents off studentx.ps1 for reverse shell
