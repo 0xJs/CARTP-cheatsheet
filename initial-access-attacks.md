@@ -148,12 +148,12 @@ config domain studentx.corp
 
 #### Set the IP for the evilginx server
 ```
-config ip 172.16.x.x
+config ip xx.xx.xx.xx
 ```
 
 #### Use the template for office365
 ```
-phishlets hostname o365 login.studentx.corp
+phishlets hostname o365 <DOMAIN>
 ```
 
 #### Verify the DNS entries
@@ -162,7 +162,7 @@ phishlets get-hosts o365
 ```
 
 #### Copy the certificate and private key
-0365.cr and 0365.key from ```C:\studentx\.evilginx\crt to C:\studentx\.evilginx\crt\ login.studentx.corp```
+0365.cr and 0365.key from ```C:\studentx\.evilginx\crt``` to ```C:\studentx\.evilginx\crt\login.studentx.corp```
 
 #### Enable phishlets
 ```
