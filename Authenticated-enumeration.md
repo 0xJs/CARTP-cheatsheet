@@ -10,11 +10,11 @@
   * [App enumeration](#App-enumeration)
   * [Service-principals enumeration](#Service-principals-enumeration)
 * [Enumeration using Az powershell](#Enumeration-using-Az-powershell)
-  * [Available resources](#az-Available-resources)
-  * [Roles](#az-Roles)
-  * [Users](#az-Users)
-  * [Groups](#az-Groups)
-  * [Resources](#az-Resources)
+  * [Available resources](#Available-resources)
+  * [Roles](#Roles)
+  * [Users](#Users)
+  * [Groups](#Groups)
+  * [Resources](#Resources)
 * [Enumeration using Azure CLI](#Enumeration-using-Azure-CLI)
 * [Using Azure tokens](#Using-Azure-tokens)
   * [Stealing tokens](#Stealing-tokens)
@@ -397,7 +397,7 @@ Get-AzContext
 Get-AzContext -ListAvailable
 ```
 
-### az-Available resources
+### Available resources
 #### Enumerate subscriptions accessible by the current user
 ```
 Get-AzSubscription
@@ -410,7 +410,7 @@ Get-AzResource
 Get-AzResource | select-object Name, Resourcetype
 ```
 
-### az-Roles
+### Roles
 #### Enumerate all Azure RBAC role assignments
 ```
 Get-AzRoleAssignment
@@ -426,7 +426,7 @@ Get-AzRoleAssignment -Scope <RESOURCE ID>
 Get-AzRoleDefinition -Name "<ROLE DEFINITION NAME>"
 ```
 
-### az-Users
+### Users
 #### Enumerate all users
 ```
 Get-AzADUser
@@ -447,7 +447,7 @@ Get-AzADUser -SearchString "admin"
 Get-AzADUser |?{$_.Displayname -match "admin"}
 ```
 
-### az-Groups
+### Groups
 #### List all groups
 ```
 Get-AzADGroup
@@ -473,7 +473,7 @@ Get-AzADGroup |?{$_.Displayname -match "admin"}
 Get-AzADGroupMember -ObjectId <ID>
 ```
 
-### az-Resources
+### Resources
 ####  Get all the application objects registered with the current tenant (visible in App  Registrations in Azure portal). An application object is the global representation of an app. 
 ```
 Get-AzADApplication
