@@ -39,6 +39,11 @@ $password = ConvertTo-SecureString '<PASSWORD>' -AsPlainText -Force
 $creds = New-Object System.Management.Automation.PSCredential('<USERNAME>', $password)
 ```
 
+#### Find a specific file
+```
+Get-Childitem -Path C:\ -Force -Include <FILENAME OR WORD TO SEARCH> -Recurse -ErrorAction SilentlyContinue
+```
+
 ## PSSession
 #### Save pssession in variable
 ```
