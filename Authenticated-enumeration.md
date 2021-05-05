@@ -56,8 +56,8 @@ Connect-AzureAD -Credential $creds
 ```
 
 ```
-$passwd = ConvertTo-SecureString "SuperVeryEasytoGuessPassword@1234" -AsPlainText -Force
-$creds = New-Object System.Management.Automation.PSCredential ("test@defcorphq.onmicrosoft.com", $passwd)
+$passwd = ConvertTo-SecureString "<PASSWORD>" -AsPlainText -Force
+$creds = New-Object System.Management.Automation.PSCredential ("<USERNAME>", $passwd)
 Connect-AzureAD -Credential $creds
 ```
 
@@ -80,7 +80,7 @@ Get-AzureADUser -all $true | Select-Object UserPrincipalName, Usertype
 
 #### Enumerate a specific user
 ```
-Get-AzureADUser -ObjectId test@defcorphq.onmicrosoft.com
+Get-AzureADUser -ObjectId <ID>
 ```
 
 #### Search for a user based on string in first characters of displayname (Wildcard not supported)
@@ -122,7 +122,7 @@ Get-AzureADUser | Get-AzureADUserCreatedObject
 
 #### Objects owned by a specific user
 ```
-Get-AzureADUserOwnedObject -ObjectId test@defcorphq.onmicrosoft.com
+Get-AzureADUserOwnedObject -ObjectId <ID>
 ```
 
 ### Group enumeration
@@ -133,7 +133,7 @@ Get-AzureADGroup -All $true
 
 #### Enumerate a specific group
 ```
-Get-AzureADGroup -ObjectId 783a312d-0de2-4490-92e4-539b0e4ee03e
+Get-AzureADGroup -ObjectId <ID>
 ```
 
 #### Search for a group based on string in first characters of DisplayName (wildcard not supported)
@@ -163,7 +163,7 @@ Get-AzureADGroup -All $true | ?{$_.OnPremisesSecurityIdentifier -eq $null}
 
 #### Get members of a group
 ```
-Get-AzureADGroupMember -ObjectId 783a312d-0de2-4490-92e4-539b0e4ee03e
+Get-AzureADGroupMember -ObjectId <ID>
 ```
 
 #### Get groups and roles where the specified user is a member
@@ -244,12 +244,12 @@ Get-AzureADDevice -All $true | Get-AzureADDeviceRegisteredUser
 
 #### List devices owned by a user
 ```
-Get-AzureADUserOwnedDevice -ObjectId michaelmbarron@defcorphq.onmicrosoft.com
+Get-AzureADUserOwnedDevice -ObjectId <ID>
 ```
 
 #### List deviced registered by a user
 ```
-Get-AzureADUserRegisteredDevice -ObjectId michaelmbarron@defcorphq.onmicrosoft.com 
+Get-AzureADUserRegisteredDevice -ObjectId <ID>
 ```
 
 #### List deviced managed using Intune
@@ -286,7 +286,7 @@ Get-AzureADApplication -All $true
 
 #### Get all details about an application
 ```
-Get-AzureADApplication -ObjectId a1333e88-1278-41bf-8145-155a069ebed0 | fl *
+Get-AzureADApplication -ObjectId <ID> | fl *
 ```
 
 #### Get an application based on the display name
@@ -301,17 +301,17 @@ Get-AzureADApplicationPasswordCredential
 
 #### Get the owner of a application
 ```
-Get-AzureADApplication -ObjectId a1333e88-1278-41bf-8145-155a069ebed0 | Get-AzureADApplicationOwner | fl *
+Get-AzureADApplication -ObjectId <ID> | Get-AzureADApplicationOwner | fl *
 ```
 
 #### Get apps where a user has a role (exact role is not shown)
 ```
-Get-AzureADUser -ObjectId roygcain@defcorphq.onmicrosoft.com | Get-AzureADUserAppRoleAssignment | fl * 
+Get-AzureADUser -ObjectId <ID> | Get-AzureADUserAppRoleAssignment | fl * 
 ```
 
 #### Get apps where a group has a role (exact role is not shown)
 ```
-Get-AzureADGroup -ObjectId 783a312d-0de2-4490-92e4-539b0e4ee03e | Get-AzureADGroupAppRoleAssignment | fl *
+Get-AzureADGroup -ObjectId <ID> | Get-AzureADGroupAppRoleAssignment | fl *
 ```
 
 ### Service-principals enumeration
@@ -324,7 +324,7 @@ Get-AzureADServicePrincipal -All $true
 
 #### Get all details about a service principal
 ```
-Get-AzureADServicePrincipal -ObjectId cdddd16e-2611-4442-8f45-053e7c37a264 | fl *
+Get-AzureADServicePrincipal -ObjectId <ID> | fl *
 ```
 
 #### Get a service principal based on the display name
@@ -334,22 +334,22 @@ Get-AzureADServicePrincipal -All $true | ?{$_.DisplayName -match "app"}
 
 #### Get owners of a service principal
 ```
-Get-AzureADServicePrincipal -ObjectId cdddd16e-2611-4442-8f45-053e7c37a264 | Get-AzureADServicePrincipalOwner | fl *
+Get-AzureADServicePrincipal -ObjectId <ID> | Get-AzureADServicePrincipalOwner | fl *
 ```
 
 #### Get objects owned by a service principal
 ```
-Get-AzureADServicePrincipal -ObjectId cdddd16e-2611-4442-8f45-053e7c37a264 | Get-AzureADServicePrincipalOwnedObject
+Get-AzureADServicePrincipal -ObjectId <ID> | Get-AzureADServicePrincipalOwnedObject
 ```
 
 #### Get objects created by a service principal
 ```
-Get-AzureADServicePrincipal -ObjectId cdddd16e-2611-4442-8f45-053e7c37a264 | Get-AzureADServicePrincipalCreatedObject
+Get-AzureADServicePrincipal -ObjectId <ID> | Get-AzureADServicePrincipalCreatedObject
 ```
 
 #### Get group and role memberships of a service principal
 ```
-Get-AzureADServicePrincipal -ObjectId cdddd16e-2611-4442-8f45-053e7c37a264 | Get-AzureADServicePrincipalMembership | fl * 
+Get-AzureADServicePrincipal -ObjectId <ID> | Get-AzureADServicePrincipalMembership | fl * 
 
 Get-AzureADServicePrincipal | Get-AzureADServicePrincipalMembership
 ```
@@ -426,7 +426,7 @@ Get-AzADUser
 
 #### Enumerate a specific user
 ```
-Get-AzADUser -UserPrincipalName test@defcorphq.onmicrosoft.com
+Get-AzADUser -UserPrincipalName <NAME>
 ```
 
 #### Search for a user based on string in first character of displayname (Wildcard not supported)
@@ -446,7 +446,7 @@ Get-AzADGroup
 
 #### Enumerate a specific group
 ```
-Get-AzADGroup -ObjectId 783a312d-0de2-4490-92e4-539b0e4ee03e
+Get-AzADGroup -ObjectId <ID>
 ```
 
 #### Search for a group based on string in first characters of displayname (wildcard not supported)
@@ -461,7 +461,7 @@ Get-AzADGroup |?{$_.Displayname -match "admin"}
 
 #### Get members of a group
 ```
-Get-AzADGroupMember -ObjectId 783a312d-0de2-4490-92e4-539b0e4ee03e
+Get-AzADGroupMember -ObjectId <ID>
 ```
 
 ####  Get all the application objects registered with the current tenant (visible in App  Registrations in Azure portal). An application object is the global representation of an app. 
@@ -471,7 +471,7 @@ Get-AzADApplication
 
 #### Get all details about an application
 ```
-Get-AzADApplication -ObjectId a1333e88-1278-41bf-8145-155a069ebed0
+Get-AzADApplication -ObjectId <ID>
 ```
 
 #### Get an application based on the display name
@@ -486,7 +486,7 @@ Get-AzADServicePrincipal
 
 #### Get all details about a service principal
 ```
-Get-AzADServicePrincipal -ObjectId cdddd16e-2611-4442-8f45-053e7c37a264
+Get-AzADServicePrincipal -ObjectId <ID>
 ```
 
 #### Get an service principal based on the display name
@@ -545,7 +545,7 @@ Get-AzKeyVaultSecret -VaultName ResearchKeyVault -Name Reader -AsPlainText
 ```
 az login
 
-az login -u test@defcorphq.onmicrosoft.com -p SuperVeryEasytoGuessPassword@1234 
+az login -u <USERNAME> -p <PASSWORD>
 ```
 
 #### List info on the current user
@@ -646,7 +646,7 @@ az ad group list --query "[].[displayName]" -o table
 #### Enumerate a specific group using display name or object id
 ```
 az ad group show -g "VM Admins" 
-az ad group show -g 783a312d-0de2-4490-92e4-539b0e4ee03e
+az ad group show -g <ID>
 ```
 
 #### Search for groups that contain the word "admin" in their Display name (case sensitive) - run from cmd:
@@ -676,7 +676,7 @@ az ad group member list -g "VM Admins" --query "[].[displayName]" -o table
 
 #### Check if user is member of the specified group
 ```
-az ad group member check --group "VM Admins" --member-id b71d21f6-8e09-4a9d-932a-cb73df519787
+az ad group member check --group "VM Admins" --member-id <ID>
 ```
 
 #### Get the object IDs of the groups of which the specified group is a member
@@ -692,7 +692,7 @@ az ad app list --query "[].[displayName]" -o table
 
 #### Get all details about an application using identifier uri, application id or object id
 ```
-az ad app show --id a1333e88-1278-41bf-8145-155a069ebed0
+az ad app show --id <ID>
 ```
 
 #### Get an application based on the display name (Run from cmd)
@@ -707,7 +707,7 @@ az ad app list | ConvertFrom-Json | %{$_.displayName -match "app"}
 
 #### Get owner of an application
 ```
-az ad app owner list --id a1333e88-1278-41bf-8145-155a069ebed0 --query "[].[displayName]" -o table
+az ad app owner list --id <ID> --query "[].[displayName]" -o table
 ```
 
 #### List apps that have password credentials
@@ -728,7 +728,7 @@ az ad sp list -all --query "[].[displayName]" -o table
 
 #### Get all details about a service principal
 ```
-az ad sp show --id cdddd16e-2611-4442-8f45-053e7c37a264
+az ad sp show --id <ID>
 ```
 
 #### Get a service principal based on the display name
@@ -743,7 +743,7 @@ az ad sp list --all | ConvertFrom-Json | %{$_.displayName -match "app"}
 
 #### Get owner of a service principal
 ```
-az ad sp owner list --id cdddd16e-2611-4442-8f45-053e7c37a264 --query "[].[displayName]" -o table
+az ad sp owner list --id <ID> --query "[].[displayName]" -o table
 ```
 
 #### Get service principal owned by the current user
@@ -904,7 +904,6 @@ az account get-access-token --resource-type ms-graph
 
 #### Connecting with AzureAD
 ```
-Connect-AzureAD -AccountId test@defcorphq@onmicrosoft.com -AadAccessToken eyJ0eXA...
 Connect-AzureAD -AccountId <ID> -AadAccessToken $token -TenantId <TENANT ID>
 ```
 
@@ -1035,7 +1034,7 @@ https://github.com/dirkjanm/ROADtools
 ```
 cd C:\AzAD\Tools\ROADTools
 pipenv shell 
-roadrecon auth -u test@defcorphq.onmicrosoft.com -p SuperVeryEasytoGuessPassword@1234
+roadrecon auth -u <USERNAME> -p <PASSWORD>
 ```
 
 #### Gather information
@@ -1068,7 +1067,7 @@ quasar.cmd serve -p 9091 --history
 ```
 cd C:\AzAD\Tools\stormspotter\stormcollector\
 pipenv shell
-az login -u test@defcorphq.onmicrosoft.com -p SuperVeryEasytoGuessPassword@1234
+az login -u <USERNAME> -p <PASSWORD>
 python C:\AzAD\Tools\stormspotter\stormcollector\sscollector.pyz cli 
 ```
 
@@ -1085,8 +1084,8 @@ python C:\AzAD\Tools\stormspotter\stormcollector\sscollector.pyz cli
 ```
 import-module .\AzureAD.psd1
 
-$passwd = ConvertTo-SecureString "SuperVeryEasytoGuessPassword@1234" -AsPlainText -Force
-$creds = New-Object System.Management.Automation.PSCredential ("test@defcorphq.onmicrosoft.com", $passwd) 
+$passwd = ConvertTo-SecureString "<PASSWORD>" -AsPlainText -Force
+$creds = New-Object System.Management.Automation.PSCredential ("<USERNAME>", $passwd) 
 Connect-AzAccount -Credential $creds
 Connect-AzureAD -Credential $creds
 
