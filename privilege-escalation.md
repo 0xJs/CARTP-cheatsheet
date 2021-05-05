@@ -329,7 +329,7 @@ Get-AzResourceGroupDeployment -ResourceGroupName <RESOURCE GROUP NAME>
 
 #### Save the deployment template
 ```
-Save-AzResourceGroupDeploymentTemplate -ResourceGroupName SAP -DeploymentName stevencking_defcorphq.onmicrosoft.com.sapsrv
+Save-AzResourceGroupDeploymentTemplate -ResourceGroupName <RESOURCE GROUP> -DeploymentName <DEPLOYMENT NAME>
 ```
 
 #### Find passwords in the template
