@@ -96,7 +96,7 @@ Connect-AzAccount -AccessToken $accesstoken -GraphAccessToken $aadtoken -Account
 - Check for the Roledefinition
 - Get the ID from az automation account list
 
-````
+```
 Get-AzRoleAssignment -Scope <ID>
 ```
 
