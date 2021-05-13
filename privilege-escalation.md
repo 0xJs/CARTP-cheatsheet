@@ -369,6 +369,13 @@ Get-AzStorageContainer -Context (Get-AzStorageAccount -Name <NAME> -ResourceGrou
 
 #### Check using the "Storage Explorer" application! Might be possible then!
 
+#### Check if you can access storage account keys
+```
+Get-AzStorageAccountKey -name <NAME OF STORAGE> -resourcegroupname <NAME>
+```
+
+#### Connect to the storage account with "Storage Explorer" using the account name and account keys
+
 ## Abusing dynamic groups
 - By default, any user can invite guests in Azure AD. If a dynamic group rule allows adding users based on the attributes that a guest user can modify, it will result in abuse of this feature. For example based on EMAIL ID and join as guest that matches that rule.
 - Login to the portal and check the groups. Is there any dynamic group?
