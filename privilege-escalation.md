@@ -127,6 +127,12 @@ Publish-AzAutomationRunbook -RunbookName <NAME FOR RUNBOOK> -AutomationAccountNa
 Start-AzAutomationRunbook -RunbookName <NAME OF RUNBOOK> -RunOn <WORKERGROUP NAME> -AutomationAccountName <NAME> -ResourceGroupName <NAME> -Verbose
 ```
 
+#### Extract credentials automation account
+```
+Import-Module Microburst.psm1
+Get-AzurePasswords
+```
+
 ## Command execution on a VM
 - Vm access can be found after getting a new user or tokens and seeing that it has access to a vm
 
