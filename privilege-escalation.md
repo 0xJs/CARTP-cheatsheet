@@ -374,6 +374,14 @@ Get-AzStorageContainer -Context (Get-AzStorageAccount -Name <NAME> -ResourceGrou
 Get-AzStorageAccountKey -name <NAME OF STORAGE> -resourcegroupname <NAME>
 ```
 
+### Access Storage Accounts AZ powershell
+```
+Get-AzResource
+Get-AzStorageAccount -name <NAME> -ResourceGroupName <NAME>
+Get-AzStorageContainer -Context (Get-AzStorageAccount -name <NAME> -ResourceGroupName <NAME>).context
+Get-AzStorageBlobContent -Container <NAME> -Context (Get-AzStorageAccount -name <NAME> -ResourceGroupName <NAME>).context -Blob
+```
+
 #### Connect to the storage account with "Storage Explorer" using the account name and account keys
 
 ## Abusing dynamic groups
