@@ -116,6 +116,11 @@ curl "$IDENTITY_ENDPOINT?resource=https://management.azure.com&api-version=2017-
 ```
 curl "$IDENTITY_ENDPOINT?resource=https://vault.azure.net&api-version=2017-09-01" -H secret:$IDENTITY_HEADER
 ```
+- Request AADGraph token
+```
+curl "$IDENTITY_ENDPOINT?resource=https://graph.microsoft.com/&api-version=2017-09-01" -H secret:$IDENTITY_HEADER
+curl "$IDENTITY_ENDPOINT?resource=https://graph.windows.com/&api-version=2017-09-01" -H secret:$IDENTITY_HEADER
+```
 
 ## OS Command injection
 - In case of OS command injection, it is possible to run arbitrary operating  system commands on the server where requests are processed. 
