@@ -814,15 +814,15 @@ az storage account list
 #### Stealing tokens from az cli
 - az cli stores access tokens in clear text in ```accessTokens.json``` in the directory ```C:\Users\<username>\.Azure```
 - We can read tokens from the file, use them and request new ones too!
-- azureProfile.json in the same directory contains information about subscriptions. 
-- You can modify accessTokens.json to use access tokens with az cli but better to use with Az PowerShell or the Azure AD module.
+- `azureProfile.json` in the same directory contains information about subscriptions. 
+- You can modify `accessTokens.json` to use access tokens with az cli but better to use with Az PowerShell or the Azure AD module.
 - To clear the access tokens, always use az logout
 
 #### Stealing tokens from az powershell
 - Az PowerShell stores access tokens in clear text in ```TokenCache.dat``` in the directory ```C:\Users\<username>\.Azure```
-- It also stores ServicePrincipalSecret in clear-text in AzureRmContext.jsonif a service principal secret is used to authenticate. 
+- It also stores ServicePrincipalSecret in clear-text in `AzureRmContext.json` if a service principal secret is used to authenticate. 
 - Another interesting method is to take a process dump of PowerShell and looking for tokens in it!
-- Users can save tokens using Save-AzContext, look out for them! Search for Save-AzContext in PowerShell console history!
+- Users can save tokens using Save-AzContext, look out for them! Search for `Save-AzContext` in PowerShell console history!
 - Always use Disconnect-AzAccount!!
 
 #### Request tokens from the CLI!
