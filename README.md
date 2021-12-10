@@ -1,7 +1,7 @@
 # CARTP-cheatsheet
 Azure AD cheatsheet for the CARTP course
 
-# Sumarry
+# Index
 * [General](#General)
 * [Recon \ OSINT](recon.md)
 * [Initial access attacks](initial-access-attacks.md)
