@@ -153,7 +153,8 @@ Get-AzureADGroup -All $true |?{$_.Displayname -match "admin"}
 
 #### Get groups that allow Dynamic membership (note the cmdlet name)
 ```
-Get-AzureADMSGroup | ?{$_.GroupTypes -eq 'DynamicMembership'} 
+Import-module AzureADPreview.psd1
+Get-AzureADMSGroup | ?{$_.GroupTypes -eq 'DynamicMembership'}  | fl *
 ```
 
 #### All groups that are synced from on-prem (note that security groups are not synced)
