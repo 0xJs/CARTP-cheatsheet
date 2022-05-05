@@ -388,6 +388,11 @@ Get-Command -Noun *vm* -Verb Get
 Get-Command *vm*
 ```
 
+#### Login with the az module
+```
+Connect-AzAccount
+```
+
 #### Get the information about the current context (Account, Tenant, Subscription etc).
 ```
 Get-AzContext
@@ -396,6 +401,11 @@ Get-AzContext
 #### List available contexts
 ```
 Get-AzContext -ListAvailable
+```
+
+#### Change AZ context
+```
+Set-AzContext <ID>
 ```
 
 ### Available resources
